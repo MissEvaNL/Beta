@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% set object = 'profile' %}
+{% block title %}Profiel {{data.profile.username}}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <style style="text/css">
+         #banner
+         {
+         height: 275px;
+         }
+         .profile-badge{
+         height: 40px;
+         width: 40px;
+         display: inline-block;
+         margin-right: 10px;
+         }
+         .profile-left{
+         float: left;
+         min-height: 150px;
+         }
+         .profile-right{
+         position: absolute;
+         bottom: 0;
+         right: 5%;
+         }
+         .profile-banner-details {
+         position: relative;
+         padding: 20px;
+         background: url(https://habbohomes.nl/index/assets/images/hotel.gif) no-repeat;
+         background-position: center;
+         height: 200px;
+         background-position-y: bottom;
+         }
+         .pd-info{
+         color: white;
+         }
+         .profile-habbo-badges{
+         margin-top: 20px;
+         }
+         .profile-conversation{
+         position: absolute;
+         top: -5px;
+         }
+         .profile-conversation{
+         position: absolute;
+         top: -5px;
+         }
+         .nav-tabs{
+         border: 0;
+         border-radius: 0;
+         }
+         .banner-dynamic{
+         display: none;
+         }
+      </style>
+      <div class="row content-box">
+         <div class="col-md-8">
+            <ul class="owl-carousel owl-loaded owl-drag">
+               <div class="owl-stage-outer">
+                  <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 103px;">
+                     <div class="owl-item active" style="width: auto;">
+                        <div class="profile-tab active"><a href="/profile/{{data.profile.username}}" aria-controls="home">Feed</a></div>
+                     </div>
+                     <div class="owl-item active" style="width: auto;">
+                        <div class="profile-tab"><a href="#" class="post-feed"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                     </div>
+                  </div>
+               </div>
+            </ul>
+            <div class="content">
+               <h3 style="margin-top: 0;">Tijdlijn</h3>
+               {% include "Widgets/feedstimeline.html" %}</div>
+         </div>
+         <div class="col-md-4">
+            <div class="content">
+               <div class="content-header-title" style="margin-bottom:10px">Achievements</div>
+               <div style="display:inline-block; text-align: center; margin-right: 40px;">
+                  <div style="font-size: 25px;">{{data.profile.countbadges}}</div>
+                  <div style="font-size: 10px;">Badges</div>
+               </div>
+               <div style="display:inline-block; text-align: center; margin-right: 28px;">
+                  <div style="font-size: 25px;">{{data.profile.gotw_points}}</div>
+                  <div style="font-size: 10px;">Bel-credits</div>
+               </div>
+               <div style="display:inline-block; text-align: center; margin-right: 25px;">
+                  <div style="font-size: 25px;">{{data.profile.countposts}}</div>
+                  <div style="font-size: 10px;">Forum reacties</div>
+               </div>
+               <div style="display:inline-block; text-align: center;">
+                  <div style="font-size: 25px;">{{data.profile.counttopics}}</div>
+                  <div style="font-size: 10px;">Forum topics</div>
+               </div>
+            </div>
+            <div class="content-header white profile">
+               <div class="content-header-title">Badges</div>
+            </div>
+            <div class="content" style="padding-top: 0;">
+               {% for badge in data.profile.badges %}
+               <a class="profile-achievement" style="background-image: url(https://swf.talpahotel.nl/bibliotheek/c_images/album1584/{{badge.badge_id}}.gif);" href="#" data-toggle="tooltip" data-html="true" title="" data-original-title="{{badge.badge_id}}"></a>
+               {% endfor %}
+               {{data.profile.badges.badge_id}}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div id="feed-post" class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2 class="modal-title" style="font-size:16px">Reageren op {{data.profile.username}} tijdlijn</h2>
+         </div>
+         <div class="modal-body">
+            <p>
+            <form id="login" class="active" method="post" action="/feeds/timeline/{{data.profile.id}}/post" autocomplete="off">
+               <div class="md-form">
+                  <textarea id="form" name="reply" class="md-textarea form-control" rows="5"></textarea>
+               </div>
+            </p>
+         </div>
+         <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+         <button type="submit" href="#" class="btn btn-dark">Stuur bericht</button>
+         </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

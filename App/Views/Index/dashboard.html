@@ -1,0 +1,97 @@
+﻿{% extends "base.html" %}
+
+{% set object = 'dashboard' %}
+
+{% block title %}{{object|capitalize }}{% endblock %}
+
+{% block body %}
+	<div id="main-wrapper">
+		<div class="container">
+			<div class="row content-box">
+				<div class="col-md-8">
+					<div class="slider-container">
+						<div class="slider">
+							<div class="slider__item">
+								<img src="http://mangetoica.com/wp-content/uploads/2015/10/lpromo_kitchenbundle2.png" alt="">
+								<div class="slider__caption">1: Op {{ sitename }} kun je vrienden maken , Chatten & daarmee val je op! Kom ook snel langs! #TOTIN{{ sitename }} <a href="#0">meer</a> </div>
+							</div>
+							
+							<div class="slider__item">
+								<img src="https://images.habbo.com/c_images/web_promo/lpromo_habboescape_game6.png" alt="">
+								<div class="slider__caption">2: In {{ sitename }} kun je meedoen aan de leukste evenementen!! Onze medewerkers houden je vooral bezig! </div>
+							</div>
+							
+							<div class="slider__item">
+								<img src="https://habbotemplarios.com/web/wp-content/uploads/2017/03/lpromo_easter17_gen1.png" alt="">
+								<div class="slider__caption">3: En tot slot! Op {{ sitename }} krijg je bij je registratie 50 diamanten en om het half uur 1 belcredits! Ook krijg je elkedag van {{ sitename }} een cadeau bij je volgende inlog! </div>
+							</div>
+						</div>
+						
+						<div class="slider__switch slider__switch--prev" data-ikslider-dir="prev">
+							<span><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20"><path d="M13.89 17.418c.27.272.27.71 0 .98s-.7.27-.968 0l-7.83-7.91c-.268-.27-.268-.706 0-.978l7.83-7.908c.268-.27.7-.27.97 0s.267.71 0 .98L6.75 10l7.14 7.418z"/></svg></span>
+						</div>
+							
+						<div class="slider__switch slider__switch--next" data-ikslider-dir="next">
+							<span><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20"><path d="M13.25 10L6.11 2.58c-.27-.27-.27-.707 0-.98.267-.27.7-.27.968 0l7.83 7.91c.268.27.268.708 0 .978l-7.83 7.908c-.268.27-.7.27-.97 0s-.267-.707 0-.98L13.25 10z"/></svg></span>
+						</div>
+					</div>
+					
+					<div class="content redBox">
+						<img src="https://habbobites.com/images/site/hello.gif" style="float: right; opacity: 0.5;">
+						<h3 style="margin-top: 0;">Welkom in {{hotelname}}!</h3>
+						<p>TalpaHotel is een klassieke online community in waarin je eigen avatars kunt creëren, vrienden kunt maken, kunt chatten, kamers kunt bouwen, games kunt spelen en ontwerpen en nog veel meer! Bijna alles is mogelijk op deze geweldige plaats vol waanzinnig leuke mensen. TalpaHotel staat open voor nieuwe ideeën dus schroom niet om deze eens aan één van onze teamleden te delen!</p>
+					</div>
+					
+					<div style="font-size: 20px; margin-bottom: 10px; color: #337ab7; border-bottom: 1px solid #c3c3c3; padding-bottom: 5px;">
+						Laatste nieuws
+						<div style="float: right;"><a class="btn btn-primary btn-xs" href="/news">Meer nieuws</a></div>
+					</div>
+					
+					<div class="row">
+						{% for items in data.news %}
+						<div class="col-md-6">
+							<div class="ha-article">
+								<div class="ha-thumbnail" style="background: url({{items.image}}) center;"></div>
+								
+								<div class="ha-content">
+									<div class="ha-title"><a href="/news/article/{{items.id}}">[{{items.category}}] {{items.title}}</a></div>
+									<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{items.shortstory}}</div>
+                  <div class="ha-timestamp" style="font-size: 12px; margin-top: 4px"><i class="fa fa-clock-o"></i><span>{{items.date|time_diff}} door<a href="/profile/{{items.author}}"> <div class="user-style {{items.font}}">{{items.author}}</div></a></span> <span class="pull-right"> <span class="label label-success">Nieuw!</span> </span></div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="greetings" style="background: url(http://www.habbo.nl/habbo-imaging/avatarimage?figure={{ current_user_information.look }}&headonly=0&direction=2&head_direction=2&action=&gesture=&size=l) left no-repeat, url(http://images.habbo.com/c_images/web_promo/lpromo_ny2019.png) center; ">
+						<div class="title">
+							<div>Welkom, {{ current_user.username }}!</div>
+						</div>
+						
+						<div class="greetings-prizecode">
+							<div class="prizecode-latest">
+								<table width="100%">
+									<tr>
+										<td><h4><img src="https://www.leet.ws/assets/img/icons/credit.png" style="width: 17px; height: 17px;" data-toggle="tooltip" data-placement="top" title="Credits"> <span class="label label-default">{{ current_user.credits }}</span></h4></td>
+										<td><h4><img src="https://www.leet.ws/assets/img/icons/ducket.png" style="width: 17px; height: 17px;" data-toggle="tooltip" data-placement="top" title="Duckets"> <span class="label label-default">{{current_user_information.pixels}}</span></h4></td>
+										<td><h4><img src="https://www.leet.ws/assets/img/icons/diamond.png" style="width: 17px; height: 17px;" data-toggle="tooltip" data-placement="top" title="Diamanten"> <span class="label label-default">{{current_user_information.points}}</span></h4></td>
+									</tr>
+								</table>
+							</div>
+				
+							<div class="prizecode-redeem">
+								<form method="post" action="/account/change-motto" class="web-form">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="{{current_user.motto}}" name="motto" id="prizecode" style="background: #ebebeb;">
+										
+										<span class="input-group-btn">
+											<input type="submit" class="btn btn-success" type="button" value="Wijzig missie" style="background: #007a00; border-color: #007a00;" />
+										</span>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+{% endblock %}

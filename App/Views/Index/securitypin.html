@@ -1,0 +1,32 @@
+{% include 'Index/login.html' only %}
+<script type="text/javascript">
+   $(window).on('load',function(){
+       $('#securitypin').modal('show');
+   });
+</script>
+<div id="securitypin" class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2 class="modal-title">Nog één stap verwijderd..</h2>
+         </div>
+         <div class="modal-body">
+            <p>
+               Om security redenen vragen wij om een pincode, mocht je deze vergeten zijn geen paniek! Vraag <a href="">hier</a> een nieuw wachtwoord aan!
+               <br /><br />
+            <form id="login" class="active" method="post" action="/login/validate-token" autocomplete="off">
+               <div class="form-group">
+                  <input type="password" class="form-control" name="pin" id="recipient-name" placeholder="Pincode" required>
+                  <input type="hidden" name="tokenid" value="{{token}}">
+               </div>
+               </p>
+         </div>
+         <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+         <button type="submit" href="#" class="btn btn-dark">Ga door</button>
+         </form>
+         </div>
+      </div>
+   </div>
+</div>

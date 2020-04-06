@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% set object = 'category' %}
+{% block title %}{{data.topics.title}}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-sm-9">
+            <ol class="breadcrumb" style="background: white; border-radius: 0;">
+               <li><a href="/forum">Forum</a></li>
+               <li class="active">{{data.topics.title}}</li>
+            </ol>
+            <div class="banner-header" style="background: url(/templates/brain/style/images/1567fb58ce57xc_xjkjn29js.png) center; margin-bottom: 10px; color: white; padding: 20px;">
+               <div class="bh-title" style="font-size: 22px;">{{data.topics.title}}</div>
+            </div>
+            <div class="content">
+               <div class="row">
+                  <div class="col-md-8">
+                     <a href="/forum/category/{{data.topics.id}}/new" class="btn btn-success pull-left">Nieuwe topic</a>
+                  </div>
+                  <div class="col-md-4">
+                     <nav>
+                        <ul class="pager pull-right" style="margin-top: 0;">
+                           <li><a href="#">Volgende</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="discussions">
+                  {% for topic in data.topics.topics %}
+                  <div class="discussion-item" {% if topic.is_sticky == 1 %} style="background: #dff0d8; border-bottom: 2px dotted #fff" {% endif %}>
+                     <div class="d-info row">
+                        <div class="d-left col-md-8">
+                           <div class="forum-avatar">
+                              <div class="user-avatar kiss"></div>
+                              <div style="background: url(http://www.habbo.nl/habbo-imaging/avatarimage?figure={{topic.look}}&amp;head_direction=3&amp;gesture=srp&amp;headonly=1) no-repeat center; width: 48px; height: 62px;"></div>
+                           </div>
+                           <div class="forum-list-title">
+                             {% if topic.is_sticky == 1 %}<img src="/templates/brain/style/images/sticky_icon.gif" data-toggle="tooltip" title="Dit topic is een sticky">{% endif %}
+                             {% if topic.is_closed == 1 %}<img src="/templates/brain/style/images/forum/locked_icon.gif" data-toggle="tooltip" title="Dit topic is gesloten">{% endif %}
+                             <a href="/forum/thread/{{topic.id}}">{{topic.title}}</a></div>
+                           <div class="forum-list-desc">
+                              {{topic.created_at|time_diff}} Door 
+                              <a href="/profile/{{topic.author}}" class="user-style {{topic.font}}">
+                                 <div class="user-icon spider"></div>
+                                 {{topic.author}}
+                              </a>
+                           </div>
+                        </div>
+                        <div class="d-right col-md-4">
+                          {% if topic.latest_post is null %}
+                          <br />
+                          <div class="d-author">
+                              Nog geen reacties
+                          </div>
+                          {% else %}
+                           <div class="d-author">
+                              Laatste reactie door 
+                              <a href="/profile/{{topic.latest_post.author}}" class="user-style {{topic.latest_post.font}}">
+                                 <div class="user-icon koala"></div>
+                                 {{topic.latest_post.author}}
+                              </a>
+                           </div>
+                           <a href="/forum/thread/{{topic.id}}">
+                              <div class="d-last"><span class="timeago" title="{{topic.latest_post.created_at|time_diff}}">{{topic.latest_post.created_at|time_diff}}</span></div>
+                              <img src="/templates/brain/style/images/chat_icon.gif"> {{topic.count_posts-1}}
+                           </a>
+                          {% endif %}
+                        </div>
+                        
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-3">
+            {% include 'Widgets/nowonline.html' %}
+         </div>
+      </div>
+   </div>
+</div>
+{% block bodyfooter %}
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
+{% endblock %}
+{% endblock %}

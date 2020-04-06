@@ -1,0 +1,56 @@
+{% extends "Housekeeping/base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+	<div class="col-12 col-md-8 col-lg-9 col-xl-10 pl-lg-4">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-default widget">
+					<div class="card-header">
+						<h5 class="card-title">Ban Logs</h5>
+					</div>
+					<div class="card-body">
+						<table id="logs" class="table" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Data</th>
+									<th>Reason</th>
+									<th>By</th>
+									<th>Expire</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+                {% set newArray = [] %}
+                {% for bans in data.banlogs %}
+                    {% set stamp = logs.timestamp|slice(0, 10) %}
+                    {% if bans.expire not in newArray %}
+                    <tr>
+                      <td>{{bans.id}}</td>
+                      <td data-toggle="modal" data-target="#unbanModal" data-id="{{bans.value}}"><a href="#">{{bans.value}}</a></td>
+                      <td>{{bans.reason}}</td>
+                      <td>{{bans.addedby}}</td>
+                      <td>{{bans.expire|date("d-M-Y - H:i:s")}}</td>
+                    </tr>
+                    {% set newArray = newArray|merge([bans.expire]) %}
+                    {% endif %}
+                {% endfor %}
+							</tbody>
+						</table>
+					</div>
+					
+					<script>
+						document.addEventListener("DOMContentLoaded", function(event) {
+							$('#logs').DataTable({
+								order: [[ 0, "desc" ]],
+								lengthChange: 1,
+								responsive: true
+							});
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

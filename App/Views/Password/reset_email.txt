@@ -1,0 +1,10 @@
+Aanvraag wachtwoord resetten
+
+Dit hebt u nodig om een nieuwe aan te maken. 
+We hebben onlangs een verzoek ontvangen om het wachtwoord voor uw account te resetten: {{email}}
+
+Klik, om uw wachtwoord te resetten, op deze koppeling (of kopieer en plak deze in uw internetbrowser): 
+{{url}}
+
+Als u het resetten van uw wachtwoord niet hebt aangevraagd, kunt u deze e-mail gewoon negeren. 
+Er worden geen wijzigingen aangebracht in uw account. 

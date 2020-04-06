@@ -1,0 +1,65 @@
+﻿{% include '_Layout/index_header.html' only %}
+<div class="white">
+   <div class="content">
+      <form id="login" class="active" action="/login/do" method="post">
+         <h2>Welkom op {{sitename}}Hotel!</h2>
+         <p>{{sitename}} is een geweldige community waar je online vrienden kunt maken. Heb je nog een account, <a href="/register">registreer</a> je gauw en dan zien wij je snel!</p>
+         <div class="title cf">
+            <div class="left">Inloggen</div>
+            <div class="right">Speel nu!</div>
+         </div>
+         <div class="alert" style="display: none;"></div>
+         <input type="text" id="log-mail" name="username" placeholder="Gebruikersnaam of E-mail" onkeyup="changeAvatar(this.value);" value="{{ username }}" style="{% if errors %}border: 1px solid #d65454{% endif %}">
+         <div class="imager" id="imager" style="background-image: url(/templates/brain/style/images/ghost.png);"></div>
+         <input type="password" id="password" name="password" placeholder="Wachtwoord" style="{% if errors %}border: 1px solid #d65454{% endif %}">
+         <div class="forgot_password" id="open_forgot"><a href="/password/forgot">Wachtwoord vergeten?</a></div>
+         <div class="cf">
+            <button type="submit" class="log_in" id="doLogin">Log in!</button>
+            <button type="button" class="facebook" id="loginFacebook"><i class="fa fa-facebook" aria-hidden="true"></i> Inloggen met facebook</button>
+         </div>
+         <div class="sign_up">Nieuw hier op {{hotelname}} ? <b><a class="signup" href="/register">Meld je GRATIS aan!</a></b></div>
+      </form>
+   </div>
+   <div class="hotel_view"></div>
+</div>
+<div class="orange">
+   <div class="content">
+      <div class="room">
+         <div id="con">
+            <div class="arrow_top"></div>
+            <div class="room_1 active" id="room_1"></div>
+            <div class="room_2" id="room_2"></div>
+            <div class="room_3" id="room_3"></div>
+            <div class="room_4" id="room_4"></div>
+            <div class="friends" id="friends"></div>
+            <div id="welcomeHome" class="active"></div>
+         </div>
+         <div class="box_msg" id="box_1">
+            <h3>Maak je eigen {{sitename}} avatar</h3>
+            <div style="float: right; margin-left: 30px; margin-top: -46px;">
+               <img src="/templates/brain/style/images/arrow_user.png">
+               <div class="cf"></div>
+               <img src="templates/brain/style/images/user_none.png" style="margin-top: 8px;">
+            </div>
+            <p>Style je eigen avatar naar de laatste modetrends, in {{sitename}} hebben wij nu de nieuwste kleding in ons assortiment!</p>
+         </div>
+         <div class="box_msg" id="box_3">
+            <h3>Creeër daarna je eigen kamer!</h3>
+            <div style="float: right; margin-left: 30px; margin-top: 10px;">
+               <img src="templates/brain/style/images/furniture.png">
+            </div>
+            <p>In {{sitename}} kun je met eigen gekochte meubels je kamer inrichten, wil jij echt uniek zijn? Ga de uitdaging aan!</p>
+         </div>
+         <div class="box_msg" id="box_4">
+            <h3>SPEEL GRATIS, VOOR ALTIJD.</h3>
+            <p>{{sitename}} is een gratis game, dus je kunt een enorme wereld vol kamers ontdekken, quests voltooien,
+               chatten en prijzen winnen zonder dat je er ooit voor hoeft te betalen!
+            </p>
+            <a href="/register"><button type="submit" class="btn btn-dark">Maak een account aan</button></a>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+</div>
+{% include '_Layout/index_footer.html' only %}

@@ -1,0 +1,17 @@
+<div class="content">
+  <div style="margin-bottom: 30px;">
+    
+  <nav style="text-align: right; float: right; ">
+    {% include 'Pagination/Modules/pagination.html' with {
+        currentFilters: {
+          page: '/',
+        },
+        currentPage: currentPage,
+        paginationPath: '/' ~ object ~ data.id,
+        showAlwaysFirstAndLast: true,
+        lastPage: totalPages,
+        urlType: 'slash',
+      } %}
+   </nav>  
+  </div>
+</div>

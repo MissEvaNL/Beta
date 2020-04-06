@@ -1,0 +1,108 @@
+{% extends "Housekeeping/base.html" %}
+{% block title %}Staff-logs{% endblock %}
+{% block body %}
+<div class="col-12 col-md-8 col-lg-9 col-xl-10 pl-lg-4">
+   <div class="row">
+      <div class="col-md-6">
+         <div class="card card-default widget">
+            <div class="card-header">
+               <h5 class="card-title">Chat Logs (All)</h5>
+            </div>
+            <div class="card-body">
+               <form method="post" action="{{siteurl}}housekeeping/remote/control">
+                  <label class="sr-only" for="inputUsername">Username</label>
+                  <div class="input-group mb-2 mr-sm-2">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                     </div>
+                      <select name="element" class="form-control targetManage"></select>
+                     <input type="hidden" name="object" value="manageuser" />
+                     <input type="hidden" name="type" value="chatlogs">
+                  </div>
+                  <input type="hidden" name="action" value="1">
+                  <button type="submit" class="btn btn-primary mb-2">Check</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="card card-default widget">
+            <div class="card-header">
+               <h5 class="card-title">Messenger Logs</h5>
+            </div>
+            <div class="card-body">
+               <form method="post" action="{{siteurl}}housekeeping/remote/control">
+                  <label class="sr-only" for="inputUsername">Username</label>
+                  <div class="input-group mb-2 mr-sm-2">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                     </div>
+                        <select name="element" class="form-control targetManage"></select>
+                        <input type="hidden" name="object" value="manageuser" />
+                        <input type="hidden" name="type" value="messengerlogs">
+                  </div>
+                  <input type="hidden" name="action" value="2">
+                  <button type="submit" class="btn btn-primary mb-2">Check</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-12">
+         <div class="card card-default widget">
+            <div class="card-header">
+               <h5 class="card-title">Staff Logs</h5>
+            </div>
+            <div class="card-body">
+               <form method="post">
+                  <label class="sr-only" for="inputUsername">Username</label>
+                  <div class="input-group mb-2 mr-sm-2">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                     </div>
+                     <select name="element" class="form-control targetManage"></select>
+                  </div>
+                  <button type="submit" class="btn-small form-control" style="float:right;width:10%"><i class="fa fa-fw fa-check"></i></button>
+               </form>
+               <table id="logs" class="table" cellspacing="0" width="100%">
+                  <thead>
+                     <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Type</th>
+                        <th width="40%">Data</th>
+                        <th width="10%">Target</th>
+                        <th width="20%">Timestamp</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% for logs in data.logs %}
+                     <tr>
+                        <td>{{logs.id}}</td>
+                        <td data-toggle="modal" data-target="#actionModal" data-id="{{logs.username}}"><a href="#">{{logs.username}}</a></td>
+                        <td>{{logs.type}}</td>
+                        <td>{{logs.data}}</td>
+                        {% if logs.target is empty %}
+                          <td>Housekeeping</td>
+                        {% else %}
+                        <td data-toggle="modal" data-target="#actionModal" data-id="{{logs.target}}"><a href="#">{{logs.target}}</a></td>
+                        {% endif %}
+                        <td>{{logs.timestamp|time_diff}}</td>
+                     </tr>
+                     {% endfor %}
+                  </tbody>
+               </table>
+            </div>
+            <script>
+               document.addEventListener("DOMContentLoaded", function(event) {
+               	$('#logs').DataTable({
+               		order: [[ 0, "desc" ]],
+               		lengthChange: 1,
+               		responsive: true
+               	});
+               });
+            </script>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

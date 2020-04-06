@@ -1,0 +1,223 @@
+{% if current_user %}
+{% extends "permissions.html" %}
+{% set set_permission = 'homepage' %}
+{% block base %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<meta name="description" content="Virtuele wereld waar je vrienden kunt maken en ontmoeten.">
+    <meta name="keywords" content="{{ sitename }}, chat, chill, vrienden, community, virtuele, wereld, chat, online, kamer inrichten, selfies, gratis, meubels, kamers, badges, huisdieren, groepen, ltd, diamanten, belcredits">
+
+	<title>{% block title %}{% endblock %} - {{ sitename }}</title>
+	
+    <link rel="icon" href="/assets/img/favicon.ico">
+
+    <link href="/assets/css/bootstrap.min.css?v=?v={{ date().timestamp }}" rel="stylesheet">
+    <link href="/assets/css/pnotify.custom.min.css?v={{ date().timestamp }}" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nanoscroller.css?v=?v={{ date().timestamp }}" rel="stylesheet">
+    <link href="/assets/css/slicknav.css?v={{ date().timestamp }}" rel="stylesheet">
+  
+	<!-- Theme !-->
+    <link href="/assets/css/app.css?v={{ date().timestamp }}" rel="stylesheet">
+	
+	<!-- Fonts !-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700" rel="stylesheet" type="text/css">
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+    <script type="text/javascript">
+        window.cookieconsent_options = {"message":"{{ sitename }} maakt gebruik van eigen cookies en die van derden om zo een betere service te kunnen verlenen en zorgt er daarnaast voor dat de advertenties beter bij jouw voorkeuren aansluiten. Als je gebruik maakt van onze website ga je akkoord met ons cookie-beleid.","dismiss":"OK","learnMore":"Lees meer","link":"#cookiePapers","theme":"light-bottom"};
+    </script>
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="page">
+		<header>
+			<div class="banner-dynamic" style="opacity: 0.6;"></div>
+			<div class="banner-dynamic banner-backdrop" style="top: -150px; height: 450px; background: url(https://images.habbo.com/c_images/hotel_view_images_hq/hotelview_xmas10_es.png);"></div>
+			
+			<div id="banner-overlay" style="position: relative; z-index: 5;">
+				<div class="container">
+					<div id="radio">
+						<a href="#" class="radio-poll-sign infobox" data-title="Live Poll" data-content="/radio/poll" data-type="live" style="display: none;"></a>
+					
+						<div id="radio-dj-avatar"><div class="dj-robot"></div></div>
+						<div id="radio-stats">
+							<div id="radio-show"><span class="current-show"><span class="hidden-xs">Talpa status: <font color="lime"><b>ONLINE</b></font></span></span></div>
+							<div id="radio-now-playing" style="font-weight: bold;" class="hidden-xs hidden-sm">
+								<span class="current-song">
+									{% include 'Index/displayonline.html' %}
+									<div class="like-song"></div>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div id="radio-player" style="margin-top:10px">
+						<a href="{{ siteurl }}client" target="_blank" class="hotel-button" id="ga-linkid-hotel"><span class="hotel-button__text" translate="NAVIGATION_HOTEL"><b>Naar {{ hotelname }}</b></span></a>
+					</div>
+				</div>
+		  </div>
+		  {% if object == "profile" %}
+		  <div class="container profile-banner-details">
+			<div class="profile-right">
+				<div style="background: url(https://www.habbo.com/habbo-imaging/avatarimage?figure={{data.profile.look}}&amp;direction=4&amp;head_direction=3&amp;gesture=sml&amp;size=l); height: 170px; width: 128px;"></div>
+			</div>
+		  </div>
+		  {% endif %}
+		</header>
+		
+		<nav>
+			<div class="container">
+				<div id="logo"></div>
+				
+				<div id="left">
+					<div id="nav" class="nav-responsive-hidden">
+						<ul>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>{{ current_user.username }}(<img src="/assets/img/icons/id.png">)</span> <span class="caret"></span></a>
+								<ul class="dropdown-menu nav-dropdown">
+									<li><a href="{{  siteurl }}dashboard" style="padding: 10px;">Home</a></li>
+									<li><a href="{{  siteurl }}account/settings" style="padding: 10px;">Instellingen</a></li>
+									<li><a href="{{  siteurl }}profile/{{current_user_information.username}}" style="padding: 10px;">Mijn pagina</a></li>
+									<li style="border-top: 1px solid #acacac"><a href="{{  siteurl }}logout" style="padding: 10px;">Log uit</a></li>
+								</ul>
+							</li>
+							
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>Community</span> <span class="caret"></span></a>
+								<ul class="dropdown-menu nav-dropdown">
+									<li><a href="{{  siteurl }}news" style="padding: 10px;">Nieuws</a></li>
+                  <li><a href="{{  siteurl }}feeds" style="padding: 10px;">Feeds</a></li>
+									<li><a href="{{  siteurl }}online" style="padding: 10px;">Online</a></li>
+								</ul>
+							</li>
+							
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span>{{sitename}}</span> <span class="caret"></span></a>
+								<ul class="dropdown-menu nav-dropdown">
+									<li><a href="{{  siteurl }}staff" style="padding: 10px;">Medewerkers</a></li>
+									
+									<li><a href="#" style="padding: 10px;">Soliciteren</a></li>
+								</ul>
+							</li>
+
+							<li>
+								<a href="{{  siteurl }}shop"><span>Winkel</span></a>
+							</li>
+							
+							<li>
+								<a href="{{  siteurl }}forum"><span>Forum</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				{% if 'housekeeping' in permissions %}
+				<div id="right">
+					<div id="nav">
+					<ul>
+					  <li><a href="{{  siteurl }}housekeeping"><span>Housekeeping</span> <img src="/assets/img/icons/login.gif" class="nav-icon-responsive-responsive"></a></li>
+					</ul>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</nav>
+	</div>
+
+    {% block body %} {% endblock %} 
+    
+    {% if object != "dashboard" and object != "forum" and object != "online" and object != "category" %}
+    <div class="col-md-4">
+    {% endif %}
+    {% if object == "online" or object == "forum" %}
+    <div class="col-md-3">
+    {% endif %}
+    {% for key, value in widgets %}
+        {% if key == object %}
+          {% set page = key %}
+          {% for template in value %}
+            {% include "Widgets/" ~ template ~ ".html" ignore missing %}
+          {% endfor %}
+       {% endif %}
+    {% endfor %}
+    {% if object != "dashboard" and object != "forum" %}
+    </div>
+    {% endif %}
+	
+    <script src="/assets/js/jquery.min.js"></script>    
+    <script src="/templates/housekeeping/style/js/forms.js"></script>
+    <script src="/templates/housekeeping/style/js/tables.js"></script>
+    <script src="/assets/js/slider.js"></script>
+    <script src="/assets/js/jquery-ui-slider.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/pnotify.custom.min.js?v=1"></script>
+    <script src="/assets/js/app.js?v={{ date().timestamp }}"></script>
+    <script src="/assets/js/pagination.js?v=?v={{ date().timestamp }}"></script>
+    <script src="/assets/js/nanoscroller.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <script src="/assets/js/jquery.slicknav.min.js"></script>
+    <script src="/assets/js/pnotify.custom.min.js"></script>
+
+      
+	<script>
+	$(function () { $('.nav-responsive-hidden').slicknav({ prependTo:'nav #left', label:'' });
+	$('[data-toggle="tooltip"]').tooltip(); $('[data-toggle="popover"]').popover();})
+	</script>
+	
+	<script>
+	$(".nano").nanoScroller({ scroll: 'top' });
+	</script>
+    {% if block("bodyfooter") is defined %}
+      {% block bodyfooter %} {% endblock %}
+    {% endif %}
+    {% for message in flash_messages %} 
+    <script type="text/javascript">
+    $(function () {
+        {% if message.type == 'error' %}
+            new PNotify({
+                 title: 'Oeps!',
+                 text: '{{ message.body }}',
+                 type: 'error',
+             });
+        {% endif %}
+        {% if message.type == 'success' %}
+            new PNotify({
+                 title: 'Jeuj!',
+                 type: 'success',
+                 text: '{{ message.body }}',
+             });
+        {% endif %}
+        {% if message.type == 'warning' %}
+            new PNotify({
+                 title: 'Let op!',
+                 text: '{{ message.body }}',
+                 type: 'warning'
+             });
+        {% endif %}
+        {% if message.type == 'warning-hide' %}
+              new PNotify({
+                 title: 'Let op!',
+                 text: '{{ message.body }}',
+                 hide: false
+              });
+        {% endif %}
+    });
+    </script>
+  {% endfor %}
+</body>
+</html>
+{% endblock %} 
+{% endif %}

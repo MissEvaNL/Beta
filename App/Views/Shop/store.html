@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% set object = 'store' %}
+{% block title %}Winkel{% endblock %}
+{% block body %}
+
+
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+            <div class="content">
+               <a href="/exchange" class="btn btn-primary btn-xs pull-right">Mijn aankopen</a>
+               <h3 style="margin-top: 0; margin-bottom: 20px;">{{sitename}} Shop</h3>
+               <div class="row">
+                  <div class="col-md-4"><span class="user-icon gift"></span> <strong>{{sitename}} Dia's:</strong> {{ current_user_information.points }} <a href="https://www.habbobites.com/article/all-about-prize-codes" target="_blank"><i data-toggle="tooltip" title="" class="fa fa-info-circle" aria-hidden="true" data-original-title="You can earn Bites points by donating, and from our events and radio shows."></i></a></div>
+                  <div class="col-md-4"><span class="user-icon staffgraphics"></span> <strong>{{sitename}} Pixels:</strong> {{ current_user_information.pixels }} <a href="https://www.habbobites.com/article/introducing-bites-canvases" target="_blank"><i data-toggle="tooltip" title="" class="fa fa-info-circle" aria-hidden="true" data-original-title="Exchange Bites points for Canvas points and customise your very own canvas!"></i></a></div>
+                  {% if club != false %}<div class="col-md-4"><span class="user-icon bitesclub"></span> <strong>{{sitename}} Club:</strong> {{club|time_diff|replace({'in': "nog"})}}</div>{% endif %}
+               </div>
+               <div class="row"></div>
+            </div>
+            <div class="content shop-content">
+                {% for category in data.shop %}
+                {% if category.items is not empty %}
+               <div class="shop-category">
+                  <div class="banner-header" style="background: #47ADEC; color: white; padding: 20px;">
+                     <div class="bh-title" style="font-size: 22px;">{{category.name}}</div>
+                  </div>
+                  <div class="row" style="padding: 10px;">
+                     {% for item in category.items %}
+                     <div class="col-md-4" style="padding-right: 5px;padding-left: 5px;">
+                        <div class="s-item" style="height: 180px;">
+                           <div>
+                              <div class="si-title" data-toggle="tooltip" title="" data-original-title=" Floating Hearts">
+                                   {% if item.objectname == 'font' %}
+                                    <strong><span class="user-style {{item.image}}">{{item.item}}</span></strong>
+                                   {% else %}
+                                     <div class="user-icon floatinghearts">
+                                        <strong>{{item.item}}</strong>
+                                   </div>
+                                   {% endif %}
+                              </div>
+                              <div class="si-desc nano has-scrollbar" style="height: 75px;">
+                                 <div class="nano-content" tabindex="0" style="right: -17px;">
+                                    {% if item.objectname == 'badge' %}
+                                      <img src="{{item.image}}" style="margin-bottom: 6px"> <br />
+                                    {% endif %}
+                                    {{item.description}}
+                                   
+                                 </div>
+                                 <div class="nano-pane" style="display: none;">
+                                    <div class="nano-slider" style="height: 61px; transform: translate(0px, 0px);"></div>
+                                 </div>
+                              </div>
+                              <div class="si-price">Prijs: <strong>{{item.price}} {{sitename}} Dia's</strong></div>
+                           </div>
+                            
+                           <div class="si-purchase">
+                              <form method="post" action="/shop" class="web-form" style="display: inline-block;">
+                                 <input type="hidden" name="itemid" value="{{item.id}}">
+                                 <input type="submit" class="btn btn-success btn-xs shop-purchase" id="{{item.id}}" value="Kopen">
+                              </form>
+                              <div class="shop-gift btn btn-danger btn-xs" data-id="{{item.id}}">Gift</div>
+                           </div>
+                        </div>
+                     </div>
+                    {% endfor %}
+                  </div>
+               </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+           
+           </div>
+        <div class="col-md-4">
+<div class="content">
+<h3 style="margin-top: 0; margin-bottom: 20px;">Verzilver coupon</h3>
+<form method="post" action="/shop/redeem" class="web-form">
+<div class="input-group">
+<input type="text" class="form-control" placeholder="Voer je couponcode in" name="couponid" style="background: #ebebeb;">
+<span class="input-group-btn">
+<input type="submit" class="btn btn-success btn-redeem" value="GO!" style="background: #007a00; border-color: #007a00;">
+</span>
+</div>
+</form>
+</div>
+{% if club != false %}
+<div class="content">
+<div class="title">{{sitename}} club</div>
+  <img src="http://images.habbo.com/web_images/habbo-web-articles/spromo_BC_HC_Gifts.png" style="float: right;">
+<p>Lidmaatschap waarmee je meer kleding, exclusieve kamers, een grotere vriendenlijst en nog veel meer features kunt krijgen.</p>
+  <br />
+<ul>
+<li>{{sitename}} HC Badge</li>
+<li>Exclusieve haar + kledingstijlen</li>
+<li>Uitgebreide kamer layout</li>
+<li>Verdubbel je vriendenlijst (tot 1100!)</li>
+<li>Meer dans moves, chatwolkjes en acties</li>
+<li>Speciale commando's gebruiken!</li>
+  <li>Privileges om je eigen groep te creëren</li>
+</ul>
+  <br />
+<center>
+<button type="button" class="btn btn-square btn-info">1 maand</button>
+  <button type="button" class="btn btn-square btn-light">2 maanden</button>
+    </center>
+
+</div>
+{% endif %}
+
+</div>
+        </div>
+   </div>
+</div>
+{% endblock %}

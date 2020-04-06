@@ -1,0 +1,88 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Talpa - Housekeeping</h5>
+        <h5 class="card-title mb-0">Volg je aan de regels!</h5>
+    </div>
+    <div class="sidebar-content">
+        <a href="{{ siteurl }}housekeeping" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-home"></i> <span class="align-middle">Housekeeping - Talpa</span>
+        </a>
+    </div>
+</div>
+
+{% if 'housekeeping_remote_control' in permissions %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Tools</h5>
+    </div>
+    <div class="sidebar-content">
+        {% if 'housekeeping_remote_control' in permissions or 'housekeeping_tools' in permissions %}
+        <a href="{{ siteurl }}housekeeping/remote/control" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-desktop"></i> <span class="align-middle">Talpa instellingen algemeen</span>
+        </a>
+        {% endif %}
+        {% if 'housekeeping_permissions' in permissions or 'housekeeping_tools' in permissions %}
+        <a href="{{ siteurl }}housekeeping/manage/permissions" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-key"></i> <span class="align-middle">Gebruikers/Rank permissies</span>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+{% if 'housekeeping_ban_logs' in permissions or 'housekeeping_chat_logs' in permissions or 'housekeeping_staff_logs' in permissions %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Logs</h5>
+    </div>
+    <div class="sidebar-content">
+        {% if 'housekeeping_ban_logs' in permissions or 'housekeeping_logs' in permissions %}
+        <a href="/housekeeping/logs/ban-logs" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-eye"></i> <span class="align-middle">Hotel blokkades</span>
+        </a>
+        {% endif %}
+        {% if 'housekeeping_chat_logs' in permissions or 'housekeeping_logs' in permissions %}
+        <a href="/housekeeping/logs/chat-logs" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-eye"></i> <span class="align-middle">Chat conversaties</span>
+        </a>
+        {% endif %}
+        {% if 'housekeeping_staff_logs' in permissions %}
+        <a href="/housekeeping/logs/staff-logs" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-eye"></i> <span class="align-middle">Staff informatie <span class="badge badge-danger">TALPA STAFF</span></span>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% if 'housekeeping_website' in permissions or 'housekeeping_website_news' in permissions or 'housekeeping_settings' in permissions %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Website beheerder</h5>
+    </div>
+    <div class="sidebar-content">
+        {% if 'housekeeping_website_news' in permissions %}
+        <a href="{{ siteurl }}housekeeping/manage/widgets" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-columns"></i> <span class="align-middle">Widgets bewerken</span>
+        </a>
+        {% endif %}
+        {% if 'housekeeping_cms_tools' in permissions %}
+        <a href="{{ siteurl }}housekeeping/manage/forums" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fab fa-wpforms"></i> <span class="align-middle">Forum bewerken</span>
+        </a>
+        {% endif %}
+        {% if 'housekeeping_website_news' in permissions %}
+        <a href="{{ siteurl }}housekeeping/manage/news" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-newspaper"></i> <span class="align-middle">Nieuwspagina bewerken</span>
+        </a>
+   <a href="https://talpahotel.nl/test.html" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-newspaper"></i> <span class="align-middle">Informatie</span> <br><span class="badge badge-danger">TALPA REGELS!</span>
+        </a>        
+        {% endif %}
+        {% if 'housekeeping_settings' in permissions and current_user_information.is_admin == true %}
+        <a href="{{ siteurl }}housekeeping/settings/home" class="sidebar-item">
+            <i class="align-middle mr-1 fas fa-fw fa-cogs"></i> <span class="align-middle">Instellingen <span class="badge badge-primary">TALPA MANAGEMENT</span></span>
+        </a>      
+        {% endif %}
+    </div>
+</div>
+{% endif %}

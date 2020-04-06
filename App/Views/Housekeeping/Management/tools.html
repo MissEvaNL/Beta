@@ -1,0 +1,161 @@
+            <div class="col-md-6">
+                <div class="card card-default widget">
+                    <div class="card-header">
+                        <h5 class="card-title">Manage User</h5>
+                        <h6 class="card-subtitle text-muted"></h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{{siteurl}}housekeeping/remote/control">
+                            <label class="sr-only" for="inputUsername">Username</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">@</div>
+                                </div>
+                                <select name="element" class="form-control targetManage"></select>
+                                <input type="hidden" name="object" value="manageuser" />
+                            </div>
+
+                            <label class="sr-only" for="inputReason">Type</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="type" class="form-control">
+                                    <option value="" selected>Alle info</option>
+                                    <option value="chatlogs">Chat Logs</option>
+                                    <option value="namelogs">Name Logs</option>
+                                    <option value="purchasedlogs">Purchase Logs</option>
+                                    <option value="roomlogs">Rooms</option>
+                                    <option value="tradelogs">Trade Logs</option>
+                                    <option value="userinfo">User Info</option>
+                                </select>
+                            </div>
+     
+                            <button type="submit" class="btn btn-primary mb-2">Check</button>
+                        </form>
+                    </div>
+                </div>
+              
+                <div class="card card-default widget">
+                    <div class="card-header">
+                        <h5 class="card-title">Ban User</h5>
+                        <h6 class="card-subtitle text-muted"></h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{{siteurl}}housekeeping/remote/control">
+                            <label class="sr-only" for="inputUsername">Username</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">@</div>
+                                </div>
+                                <select name="element" class="form-control targetBan"></select>
+                                <input type="hidden" name="object" value="banuser" />
+                            </div>
+                             <label class="sr-only" for="inputReason">Reason</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="reason" class="form-control" required>
+                                    {% for bans in data.banmessages %}
+                                        <option value="{{bans.id}}">{{bans.message}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <label class="sr-only" for="inputTime">Time</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="expire" class="form-control" id="inputTime" required>
+                                    {% for bans in data.bantime %}
+                                        <option value="{{bans.id}}">{{bans.message}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <label class="sr-only" for="inputReason">Type</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="type" class="form-control" required>
+                                    <option value="user">User</option>
+                                    <option value="ip">IP</option>
+                                </select>
+                            </div>
+     
+                            <button type="submit" class="btn btn-primary mb-2">Ban user</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card card-default widget">
+                    <div class="card-header">
+                        <h5 class="card-title">Reset User</h5>
+                        <h6 class="card-subtitle text-muted"></h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <label class="sr-only" for="inputUsername">Username</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">@</div>
+                                </div>
+                                <select id="element" class="form-control targetReset"></select>
+                                <input type="hidden" name="object" value="resetuser" />
+                            </div>
+
+                            <label class="sr-only" for="inputReason">Type</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="type" class="form-control" required>
+                                    <option value="1">Look</option>
+                                    <option value="2">Motto</option>
+                                    <option value="3">Relationships</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" name="action" value="4">
+
+                            <button type="submit" class="btn btn-primary mb-2">Reset</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card card-default widget">
+                    <div class="card-header">
+                        <h5 class="card-title">Alert User</h5>
+                        <h6 class="card-subtitle text-muted"></h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <label class="sr-only" for="inputUsername">Username</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">@</div>
+                                </div>
+
+                                <select id="elem" class="form-control targetAlert"></select>
+                            </div>
+
+                            <label class="sr-only" for="inputReason">Reason</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="reason" class="form-control" required>
+                                    <option value="1">Taalgebruik</option>
+                                    <option value="2">Voordoen als Leet Staff</option>
+                                    <option value="3">Praten over Retro Hotels</option>
+                                    <option value="4">Vragen/weggeven van persoonlijke informatie</option>
+                                    <option value="5">Leet's lastig vallen</option>
+                                    <option value="6">Praten over Social Media</option>
+                                </select>
+                            </div>
+
+                            <label class="sr-only" for="inputReason">Extra</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <select name="extra" class="form-control" required>
+                                    <option value="0">None</option>
+                                    <option value="1">Disconnect</option>
+                                    <option value="2">Kick</option>
+                                    <option value="3">Mute</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" name="action" value="1">
+
+                            <button type="submit" class="btn btn-primary mb-2">Alert</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        

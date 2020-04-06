@@ -1,0 +1,33 @@
+{% include 'Index/login.html' only %}
+<script type="text/javascript">
+   $(window).on('load',function(){
+       $('#forgotpassword').modal('show');
+   });
+</script>
+<!-- Modal HTML -->
+<div id="forgotpassword" class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2 class="modal-title">Wachtwoord opvragen</h2>
+         </div>
+         <div class="modal-body">
+            <p>
+               Vul in het onderstaande veld je e-mail adres die je hebt gebruik tijdens het registreren.
+               Je ontvangt daarna een email met een tijdelijk wachtwoord die je kunt gebruiken om weer toegang te krijgen tot jouw account!
+               <br /><br />
+            <form id="login" class="active" method="post" action="/password/request-reset" autocomplete="off">
+               <div class="form-group">
+                  <input type="text" id="log-mail" name="email" placeholder="E-mailadres" autofocus required>
+               </div>
+               </p>
+         </div>
+         <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+         <button type="submit" href="#" class="btn btn-dark">Vraag aan!</button>
+         </form>
+         </div>
+      </div>
+   </div>
+</div>

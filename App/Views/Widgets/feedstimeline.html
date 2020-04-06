@@ -1,0 +1,59 @@
+      <div class="feeds">
+         {% for feed in data.feeds %}
+         <div class="feed-item" data-id="{{feed.id}}" id="{{feed.id}}">
+            <div class="fi-avatar logo" style="margin-right: 0; width: 66px; height: 60px; margin-top: -7px;">
+               <div style="background: url({% if feed.from_user_id == 0 %}/assets/img/logo.png{% else %}https://www.habbo.com/habbo-imaging/avatarimage?figure={{feed.look}}.&amp;direction=3&amp;headonly=1{% endif %}) no-repeat center; width: 48px; height: 62px;"></div>
+            </div>
+            <div class="fi-content">
+               <div class="fc-user">
+                  <strong>
+                     <div class="user-style"><span class="user-style black"><span class="user-icon cog"></span>{% if feed.from_user_id == 0 %}{{hotelname}}{% else %}<a href="/profile/{{feed.from_username}}">{{feed.from_username}}</a>{% endif %}</span></div>
+                  </strong>
+                  {% if feed.to_user_id != feed.from_user_id %}
+                  <i class="fas fa-arrows-alt-h"></i> 
+                  <strong>
+                     <div class="user-style"><a href="/profile/{{feed.to_username}}" class="user-style orange" data-toggle="tooltip" data-placement="top" title="">{{feed.to_username}}</a></div>
+                  </strong>
+                  {% endif %}
+                  - <span data-toggle="tooltip" data-placement="right" title="" data-original-title="{{feed.timestamp|time_diff}}">{{feed.timestamp|time_diff}}</span>
+               </div>
+               <div class="fc-content">{{feed.message}}</div>
+               <div class="fc-tools" data-id="{{feed.id}}">
+                  <a href="#" class="likes-count fc-like" data-id="{{feed.id}}">{{feed.likes}}</a> <a href="#" class="fc-like" data-id="{{feed.id}}" style="margin-right:10px;"><i class="fa fa-heart"  data-id="{{feed.id}}" style="color: #D67979;"></i></a> <a href="#" class="fc-react" data-id="{{feed.id}}"><span class="comments-count">{{feed.countreactions}}</span></a> <a href="#" class="fc-react fc-comment" data-id="{{feed.id}}"><i class="fa fa-comment"></i></a>        
+                  <div class="dropdown fc-more">
+                     <a href="#" class="dropdown-toggle" id="feed-dropdown-{{feed.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h" style="color: #7B7777;"></i></a>            
+                     <ul class="dropdown-menu pull-right" data-id="{{feed.id}}" aria-labelledby="feed-dropdown-{{feed.id}}">
+                        <li><a href="#" class="fc-subscribe" data-id="{{feed.id}}" style="margin: 0; float: none;"><i class="fa fa-bell"></i> Toggle Subscription</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/user/HabboBites/feed/{{feed.id}}/share" style="margin: 0; float: none;"><i class="fa fa-share"></i> Share to Feed</a></li>
+                        <li><a href="#" class="feed-post-copy" data-url="https://www.habbobites.com/user/HabboBites/feed/{{feed.id}}"><i class="fa fa-link"></i> Copy Post Link</a></li>
+                        <li><a href="#" class="modalTrigger feed-report" data-id="{{feed.id}}" data-type="feedReport" style="margin: 0; float: none;"><i class="fa fa-flag"></i> Report Post</a></li>
+                     </ul>
+                  </div>
+               </div>
+               <form method="post" action="/feeds/post/id/{{feed.id}}">
+                  <div class="fc-replies" data-id="{{feed.id}}">
+                     {% if feed.reactions is not empty %}
+                     {% for reactions in feed.reactions %}
+                     <div class="fr-item" data-id="{{feed.id}}">
+                        <strong>
+                           <div class="user-style">
+                              <div style="float: left; margin-top: -6px;background: url(https://www.habbo.com/habbo-imaging/avatarimage?figure={{reactions.look}}&amp;head_direction=3&amp;headonly=1&amp;size=s); height: 30px; width: 27px;" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{post.username}}"></div>
+                              <span class="user-style {{reactions.font}}"><a href="/profile/{{reactions.username}}">{{reactions.username}}</a>:</span></a>
+                           </div>
+                        </strong>
+                        {{reactions.message|bbcode}}
+                        <a href="#" class="modalTrigger feed-report" data-id="76725" data-type="feedCommentReport">
+                        <i class="fa fa-flag" style="color: #7B7777;"></i></a>                
+                        <a href="#" class="fcc-like " data-id="76725" style="float: right;" data-toggle="tooltip" data-placement="left" data-html="true" data-comment-likes-count="0" title="" data-original-title="0 Likes"><i class="fa fa-heart fcc-icon" data-id="76725" aria-hidden="true"></i>
+                        </a>                
+                     </div>
+                     {% endfor %}
+                     <div class="input-group"> <input type="text" class="form-control reply mentions" name="reply" data-id="40419" placeholder="Post a reply..." style="background: #F9F9F9; border: 0; -webkit-box-shadow: none; box-shadow: none;"> <span class="input-group-btn"> <input type="submit" class="btn btn-primary feed-reply" value="Reply" data-id="40419"> </span> </div>
+                     {% endif %}
+                  </div>
+               </form>
+            </div>
+         </div>
+         {% endfor %}
+      </div>

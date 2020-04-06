@@ -1,0 +1,165 @@
+{% include '_Layout/index_header.html' only %}
+<div class="container" style="margin-top: 25px;">
+    <div class="logotipo" style="color: #158cba;width: 82px; height: 34px; font-size: 37px; font-family: 'Pacifico', cursive; top: -2px; position: absolute;"><a style="color: #158cba; text-decoration: none;" href="/"> <?= $config['hotelName'] ?> </a></div>
+    <div style="clear:both;"></div>
+    <div class="panel panel-success" style="width: 45%;float: left;padding: 8px;">
+        <form id="formSignup" method="post" action="/signup/create">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                  <div class="champ">
+                    <label for="inputUsername" class="col-lg-4 control-label">{{sitename}}naam <span>Jouw uniekel naam op {{sitename}}</span></label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="username" id="username" required>
+                        <i class="glyphicon glyphicon-user form-control-feedback" style="right: 10px;"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="champ">
+                    <label for="inputEmail" class="col-lg-4 control-label">Email <span>Je hebt dit email nodig om later je wachtwoord te kunnen opvragen.</span></label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="" required>
+                        <i class="glyphicon glyphicon-envelope form-control-feedback" style="right: 10px;"></i>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="champ">
+                  <label for="inputPassword" class="col-lg-4 control-label">Wachtwoord <span>Je wachtwoord moet minimaal 6 tekens lang zijn.</span></label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" name="password" id="password" required>
+                        <i class="glyphicon glyphicon-lock form-control-feedback" style="right: 10px;"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="champ">
+                    <label for="inputPassword2" class="col-lg-4 control-label">Herhaal wachtwoord <span>...voor de zekerheid</span></label>
+                    <div class="col-lg-8">
+                        <input type="password" class="form-control" name="password_repeat" id="password_repeat" required>
+                        <i class="glyphicon glyphicon-lock form-control-feedback" style="right: 10px;"></i>
+                    </div>
+                  </div>
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="inputcaptcha" class="col-lg-4 control-label"><?php echo $lang['Rrobot']; ?></label>
+                    <div class="col-lg-8">
+                        <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="{{recaptchakey}}"></div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="text-align: center;">
+                    <div class="col-lg-8 col-lg-offset-2">
+                    </div>
+                </div
+                  <div class="form-group" style="text-align: center;">
+                    <div class="col-lg-8 col-lg-offset-4">
+                        <button type="submit" id="submitBtn" name="register" class="btn btn-dark" disabled>Maak mijn {{sitename}} aan!</button>
+                    </div>
+               </div>
+            </fieldset>
+        
+        <div style="float: right; width: 42%;" class="list-group">
+          <div class="panel panel-success" style="margin-left: -110px; padding-bottom: 15px">
+              <div class="form-group">
+
+                    <div style="width: 100%; " class="col-lg-8">
+                        <div class="champ" style="padding-top: 15px; width: 500px">
+                          Creeër jouw avatar! <span>Habbox is een virtuele wereld, ontmoet of maak nieuwe vrienden.<br />
+                          Maak je eigen kamer, speel spelletjes, en nodig al je vrienden uit!</span>
+                        </div>
+                        <div id="avatarSelector" class="builder-viewport">
+                          
+                            <div class="main-navigation">
+                              
+                                <ul>
+                                    <li class="active">
+                                        <a href="#" data-navigate="hd" data-subnav="gender"><img src="/templates/brain/style/images/avatarreg/body.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-navigate="hr" data-subnav="hair"><img src="/templates/brain/style/images/avatarreg/hair.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-navigate="ch" data-subnav="tops"><img src="/templates/brain/style/images/avatarreg/tops.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-navigate="lg" data-subnav="bottoms"><img src="/templates/brain/style/images/avatarreg/bottoms.png" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sub-navigation">
+                                <ul id="gender" class="display">
+                                    <li>
+                                        <a href="#" class="male nav-selected" data-gender="M"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="female" data-gender="F"></a>
+                                    </li>
+                                </ul>
+                                <ul id="hair" class="hidden">
+                                    <li>
+                                        <a href="#" class="hair nav-selected" data-navigate="hr"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="hats" data-navigate="ha"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="hair-accessories" data-navigate="he"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="glasses" data-navigate="ea"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="moustaches" data-navigate="fa"></a>
+                                    </li>
+                                </ul>
+                                <ul id="tops" class="hidden">
+                                    <li>
+                                        <a href="#" class="tops nav-selected" data-navigate="ch"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="chest" data-navigate="cp"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="jackets" data-navigate="cc"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="accessories" data-navigate="ca"></a>
+                                    </li>
+                                </ul>
+                                <ul id="bottoms" class="hidden">
+                                    <li>
+                                        <a href="#" class="bottoms nav-selected" data-navigate="lg"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="shoes" data-navigate="sh"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="belts" data-navigate="wa"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="clothes-colors">
+                                <div id="clothes"></div>
+                                <div id="colors"></div>
+                            </div>
+                            <div id="avatar">
+                                <img id="myHabbo" value="" src="" alt="My Habbo" title="My Habbo" />
+                                <input type="hidden" name="habbo-avatar" id="avatar-code">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <center>
+    </div>
+      
+      <link href="/templates/brain/style/css/register.css" rel="stylesheet" type="text/css">
+
+{% include '_Layout/index_footer.html' only %}

@@ -1,0 +1,60 @@
+<form method="post" action="/housekeeping/widgets/spotlight">
+    <div class="form-group row">
+       <div class="col-10">
+          <label for="example-text-input" class="col-form-label">Choose a staff member</label>
+          <div class="input-group mb-2 mr-sm-2">
+             <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+             </div>
+             <select name="staffmember" class="form-control spotlightTarget" id="optionStaff"></select>
+          </div>
+       </div>
+    </div>
+    <div class="form-group">
+       <label for="exampleFormControlTextarea1">Description</label>
+       <textarea class="form-control" name="staffdescription" rows="2">{{data.spotlight.staff.messagestaff}}</textarea>
+    </div>
+    <hr>
+    <div class="form-group">
+    <label for="example-text-input" class="col-form-label">Choose a member</label>
+    <div class="input-group mb-2 mr-sm-2">
+       <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+       </div>
+       <select name="member" class="form-control spotlightTarget" id="optionMember"></select>
+    </div>
+    </div>
+    <div class="form-group">
+       <label for="exampleFormControlTextarea1">Description</label>
+       <textarea class="form-control" name="description" rows="2">{{data.spotlight.user.messageuser}}</textarea>
+    </div>
+    </form>
+<script>
+   $('.spotlightTarget').select2({
+         dropdownParent: $("#widgetModal"),
+         placeholder: 'Select an user',
+         width: '80%',
+         theme: "bootstrap",
+         ajax: {
+             url: '/housekeeping/api/search-player',
+             dataType: 'json',
+             delay: 250,
+             data: function (params) {
+               return {
+                 searchTerm: params.term
+                };
+              },
+             processResults: function (data) {
+               return {
+                 results: data
+               };
+             },
+             cache: true
+         }
+     });
+  
+var optionStaff = "<option value='{{data.spotlight.staff.username}}' selected ='selected'>{{data.spotlight.staff.username}}</option>";
+var optionMember = "<option value='{{data.spotlight.user.username}}' selected ='selected'>{{data.spotlight.user.username}}</option>";
+$('#optionStaff').html(optionStaff);
+$('#optionMember').html(optionMember);
+</script>

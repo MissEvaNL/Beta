@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set object = 'feeds' %}
+{% block title %}{{object|capitalize}}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+<div class="container">
+<div class="row content-box">
+<div class="col-md-8">
+   {% include 'Pagination/Modules/navigation.html' %}
+</div>
+<div class="col-md-8">
+   <div class="content">
+      <div class="feed-compose">
+         <form method="post" action="/feed/post/timeline">
+            <div class="input-group">
+               <textarea class="form-control mentions" id="compose-message" name="reply" rows="1" placeholder="Hoe was je dag vandaag?" style="overflow: hidden; resize: none; height: 34px;"></textarea>
+               <span class="input-group-btn">
+               <input type="submit" class="btn btn-primary" name="compose" id="compose" value="Post">
+               </span>
+            </div>
+         </form>
+      </div>
+      <div class="feed-filter" style="padding: 10px;">
+         <strong>Alles</strong> | <a href="/feed?filter=popular">Populair vandaag</a>
+      </div>
+      {% include "Widgets/feedstimeline.html" %}
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% set object = 'topic' %}
+{% block title %}{{data.topic.title}}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-sm-9">
+            <ol class="breadcrumb" style="background: white; border-radius: 0;">
+               <li><a href="/forum">Forum</a></li>
+               <li><a href="/forum/category/{{data.forum.id}}">{{data.forum.title}}</a></li>
+               <li class="active">{{data.topic.title}}</li>
+            </ol>
+            
+           {% include 'Forum/Modules/navigation.html' %}
+  
+            {% for post in data.posts %}
+            <div class="forum-post" id="{{post.id}}">
+               <div class="forum-author">
+                  <div class="fpost-user">
+                     <strong>
+                        <div class="user-style"><a href="/profile/{{post.author}}" class="user-style {{post.font}}" data-toggle="tooltip" data-placement="top" title="">{{post.author}}</a></div>
+                     </strong>
+                  </div>
+                  {% if post.rank >= modrank %}
+                  <div class="forum-user-icon" style="background: url(/templates/brain/style/images/forum/badges/moderator.png) center no-repeat;"></div>
+                  {% endif %}
+                  {% for badges in post.shopAddons.badge %}
+                  <div class="forum-user-icon" style="background: url({{badges}}) center no-repeat;"></div>
+                 {% endfor %}
+                  <div class="hidden-sm hidden-xs">
+                     <div class="forum-post-avatar">
+                        <div style="background: url(http://www.habbo.nl/habbo-imaging/avatarimage?figure={{post.look}}&amp;head_direction=3&amp;headonly=1) no-repeat center; width: 48px; height: 62px;"></div>
+                     </div>
+                  </div>
+                  <div class="post-forum-title">Newbie</div>
+                  <div class="hidden-sm hidden-xs" style="text-align: left;"><strong>Joined:</strong> {{post.signup|date("d M Y")}}</div>
+                  <div class="hidden-sm hidden-xs" style="text-align: left;"><strong>Posts:</strong> {{post.posts}}</div>
+                  <div style="text-align: right;"><img src="https://www.habbobites.com/images/site/offline.gif"></div>
+               </div>
+               <div class="forum-content">
+                  <div class="forum-title">
+                     <img src="/templates/brain/style/images/sticky_icon.gif">
+                     <strong>
+                     {% if loop.first %}Topic:{% else %}Reageer:{% endif %} {{data.topic.title}} </strong>
+                     <span class="forum-timestamp" data-toggle="tooltip" data-placement="top" title="">{{post.created_at|time_diff}}</span>
+                  </div>
+                  <div class="forum-body">
+                      <div class="content-body" data-id="{{post.id}}">
+                      {% if post.shopAddons.bbcode == 1 %}
+                        {{post.content|bbcode}}
+                      {% else %}
+                        {{post.content|nl2br}}
+                      {% endif %}
+                      </div>
+                    <div class="forum-likes-container" data-id="{{post.id}}">
+                        <div class="forum-likes" {% if post.likes == false %}style="display:none"{% endif %} data-id="{{post.id}}">
+                            <div class="forum-likes-icon" style="float:left;"></div>
+                         
+                            {% set count = post.likes|length - 3 %}
+                                <div class="replace" data-id="{{post.id}}">
+                            {% for likes in post.likes|slice(0, 3) %}
+                                <strong><a href="/profile/{{likes.username}}" id="{{post.id}}" class="like">{{likes.username}}</a></strong>,
+                            {% endfor %}
+                                {% if post.likes|length > 3 %}
+                                    en {{count}} anderen vinden dit leuk!
+                                {% elseif post.likes|length == 1 %}
+                                    vindt dit leuk!
+                                {% else %}
+                                    vinden dit leuk!
+                            {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+
+            {% if data.topic.is_closed != 1 %}       
+                {% if current_user_information.username == post.author or current_user.rank >= 5 %}    
+                    <div class="forum-edit-box" data-id="{{post.id}}" style="display: none;"></div>
+                {% endif %}
+                
+                <div class="forum-tools">
+                    <div class="like-post-empty" style="text-align: right;" data-id="{{post.id}}">
+                        {% if current_user_information.username == post.author or current_user.rank >= 5 %}
+                            <a href="#" class="forum-post-edit" data-id="{{post.id}}"><i class="far fa-edit" style="margin-right: 5px;"></i></a>
+                        {% endif %}
+                            <a href="#" class="forum-thread-quote" data-id="{{post.id}}"><i class="fa fa-quote-right" style="margin-right: 5px;"></i></a>
+                    {% set flag = 0 %}
+                    {% for likes in post.likes %}
+                        {% if likes.username == current_user_information.username %}
+                            {% set flag = 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if flag == 1 %}
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                    {% else %}
+                        {% if current_user_information.username != post.author %}
+                        <a href="#" class="forum-post-like" data-id="{{post.id}}">
+                            <i class="fa fa-heart" aria-hidden="true" data-toggle="tooltip"  data-placement="left" data-original-title="Like!"></i>
+                        </a>
+                        {% endif %}
+                    {% endif %}
+                    </div>   
+
+                </div>
+          {% endif %}
+      </div>
+    {% endfor %}
+          {% if reply == true %}
+              <div class="content forum-reply-box" id="last">
+                  <form method="post" action="/forum/thread/{{data.topic.id}}/postreply">
+                      <div class="form-group">
+                      <textarea class="form-control" rows="3" name="reply" id="reply" required></textarea>
+                  </div>
+                  <p style="font-size: 13px;">Note: You can only post your reply in plain text. Purchase the <strong>BBCode Editing addon</strong> from the <a href="https://www.habbobites.com/shop" target="_blank">Bites shop</a> to enable <strong>BBCodes</strong>.</p> 
+                  <button type="submit" class="btn btn-primary btn-block forum-thread-reply" data-thread="2259">Reply</button>
+                  </form>
+              </div>
+         {% endif %}
+           
+        {% include 'Forum/Modules/navigation.html' %}
+           
+        </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+{% block bodyfooter %}
+<style>
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+button, select {
+    text-transform: none;
+}
+button, input {
+    overflow: visible;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+button {
+    border-radius: 0;
+}
+</style>
+<script>
+$('a[href*=#]:not([href=#])').click(function() {
+    var target = $(this.hash);
+    target = target.length ? target : $('[name=' + this.hash.substr(1) +']');
+    if (target.length) {
+        $('html,body').animate({
+            scrollTop: target.offset().top
+        }, 1000);
+    return false;
+    }
+});
+</script>
+{% endblock %}

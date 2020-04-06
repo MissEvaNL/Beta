@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% set object = 'forum' %}
+{% block title %}{{object|capitalize }}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-sm-9">
+            <div class="content">
+              {% for forum in data.forums %}
+               <div class="discussions">
+                  <div class="banner-header" style="background: #47ADEC; color: white; padding: 20px;">
+                     <div class="bh-title" style="font-size: 22px;">{{forum.category}}</div>
+                  </div>
+                   {% for forum in forum.forum %}
+                   <div class="discussion-item">
+                     <div class="d-info row">
+                        <div class="d-left col-md-8">
+                           <div class="forum-icon"><img src="/templates/brain/style/images/forum/{{forum.image}}"></div>
+                           <div class="forum-list-title"><a href="/forum/category/{{forum.id}}">{{forum.title}}</a></div>
+                           <div class="forum-list-desc">{{forum.description}}</div>
+                        </div>
+                        <div class="d-right col-md-4">
+                           <div class="d-latest"><a href="/forum/thread/{{forum.latest_topic.id}}">{{forum.latest_topic.title}}</a></div>
+                           <div class="d-author">
+                              {% if forum.count_topics == 0 %}
+                                Geen topics
+                              {% else %}
+                              door 
+                              <a href="/profile/{{forum.latest_topic.author}}" class="user-style {{forum.latest_topic.font}}">
+                                 <div class="user-icon gameboyyellow"></div>
+                                 {{forum.latest_topic.author}}
+                              </a>
+                             , <span>{{forum.latest_topic.created_at|time_diff}}</span>
+                              {% endif %}
+                           </div>
+                        </div>
+                     </div>
+                  </div> 
+                {% endfor %}
+               </div>
+              {% endfor %}
+            </div>
+         </div>
+
+{% endblock %}
+{% block bodyfooter %}
+      </div>
+   </div>
+</div>
+{% endblock %}

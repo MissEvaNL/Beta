@@ -1,0 +1,48 @@
+{% include template %}
+
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#showtags').modal('show');
+    });
+
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="showtags" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Andere {{sitename}}-leden die de tag #{{tags[0].tag}} gebruiken</h5>
+            </div>
+            <div class="modal-body">
+                <div style="padding-top: 10px;">
+                  <table class="table table-striped" style="margin-bottom: 0;">
+                    <thead>
+                      <tr>
+                    <th width="10%" style="padding: 5px; border-bottom: 1px solid #ddd;"></th>
+                    <th width="60%" style="padding: 5px; border-bottom: 1px solid #ddd;">{{sitename}}naam</th>
+                    <th width="30%" style="padding: 5px; border-bottom: 1px solid #ddd;">Laatst online</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                  {% for tag in tags %}
+                    <tr>
+                    <th style="vertical-align: middle;" scope="row"><div style="background: url(https://www.habbo.nl/habbo-imaging/avatarimage?figure={{tag.look}}&head_direction=3&headonly=1&size=s); height: 30px; width: 27px; display: inline-block;" data-toggle="tooltip" data-placement="right" title="Amnion"></div></th>
+                    <td style="vertical-align: middle;">
+                    <a href="#" target="_blank">{{tag.username}}</a> </td>
+                    <td style="vertical-align: middle;"><span data-livestamp="1549198800" data-toggle="tooltip" title="3 Feb (Sun) 09:00 PM (Asia/Singapore)">{{ tag.last_login|date("d-m-Y H:i:s") }}</span></td>
+                    </tr>
+                  {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+            </div>
+        </div>
+    </div>
+</div>

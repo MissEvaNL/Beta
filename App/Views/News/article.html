@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% set object = 'article' %}
+{% block title %}{{data.article.title}}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+<div class="container">
+<style type="text/css">
+.article-content img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.inline img{
+    display: inline-block;
+}
+.guide-button {
+	cursor: pointer;
+    background: #f5f5f5;
+    padding: 10px;
+    display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+.guide-button.complete {
+	background: #a1ca7c;
+	color: white;
+}
+.quick-comment {
+	display: inline-block; padding: 5px 10px; background: #f5f5f5; border-radius: 50px; font-size: 13px; margin: 10px 5px 0px 5px; cursor: pointer;
+}
+</style>
+<div class="row content-box">
+<div class="col-md-8">
+<div class="article-header">
+<h3 style="margin: 0;">{{data.article.title}}</h3>
+<div class="article-info">
+Geplaatst op: {{data.article.date|time_diff}} door <a href="/profile/{{data.article.author}}" style="color: white; font-weight: bold;">{{data.article.author}}</a>
+</div>
+</div>
+<div class="article-banner" style="background: url({{data.article.image}}) center;"></div>
+<div class="content article-content">
+<div class="article-body">
+{{data.article.longstory|raw}}
+</div>
+</div>
+
+</div>
+<div class="col-md-4">
+<div class="content">
+<div class="title">Reacties</div>
+<div class="article-comments nano has-scrollbar" style="height: 200px;">
+<div class="nano-content article-cmts" tabindex="0" style="right: -17px;">
+<div class="nano-pane" style="display: block;"><div class="nano-slider" style="height: 0px; transform: translate(0px, 0px);"></div></div>
+{% if data.posts == null  %}
+  <p class="nopost">
+    Er zijn nog geen reacties geplaatst. Ben jij de eerste? Plaats hieronder!
+  </p>
+{% endif %}
+{% for post in data.posts %}
+  <div class="ac-item" data-id="{{post.id}}" style="border-radius: 10px;">
+    <strong><div class="user-style"><a href="/profile/{{post.author}}" data-toggle="tooltip" data-placement="top" title="-d0ughnuts on Habbo">
+      <span class="user-icon paintbrush"></span> 
+      <span class="user-style {{post.font}}">{{post.author}}</span></a></div></strong>: {{post.message}} 
+      {% if post.author == current_user_information.username %}
+      <div style="float: right">
+        <a href="#" id="delete-reply" data-id="{{post.id}}"><i class="fas fa-trash-alt"></i></a>
+      </div>
+      {% endif %}
+  </div>
+{% endfor %}
+</div>
+<div class="nano-pane" style="display: block;"><div class="nano-slider" style="height: 57px; transform: translate(0px, 0px);"></div></div></div>
+<div class="input-group">
+<input type="text" class="form-control" id="reply" name="reply" placeholder="Plaats een reactie.." style="background: #ebebeb;">
+<span class="input-group-btn">
+<input type="submit" class="btn btn-primary" data-id="{{data.article.id}}" id="article-reply" value="Reply">
+</span>
+</div>
+</div>
+
+
+</div>
+</div> </div>
+</div>
+
+{% endblock %}

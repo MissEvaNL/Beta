@@ -1,0 +1,49 @@
+{% include 'Index/login.html' only %}
+
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#securitypin').modal('show');
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="securitypin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Wachtwoord wijzigen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Onlangs heb je aangegeven je wachtwoord vergeten te zijn en via het onderstaande formulier kun je je wachtwoord aanpassen.
+   
+      <form  method="post" action="/password/reset-password">
+        <input type="hidden" name="token" value="{{token}}" />
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="password" placeholder="Wachtwoord" autofocus>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="passwordConfirmation" placeholder="Herhaal wachtwoord" autofocus>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+        </p>
+      </div>
+      
+    </p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+        <button type="submit" href="#" class="btn btn-dark">Ga door</button>
+       </form> 
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .form-group {
+    padding: 10px;
+    margin-top: 10px
+  }
+</style>

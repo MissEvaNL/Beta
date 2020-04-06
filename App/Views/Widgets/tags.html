@@ -1,0 +1,95 @@
+<div class="content-header habbos">
+    <div class="content-header-title">{{sitename}}Tags</div>
+    <div class="content-header-desc">Wat gaat er allemaal rond?</div>
+</div>
+<div class="content">
+    <div class="online-users">
+
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#1" data-toggle="tab">Mijn tags</a>
+            </li>
+            <li><a href="#2" data-toggle="tab">Populaire tags</a>
+            </li>
+        </ul>
+
+        <div class="tab-content ">
+            <div class="tab-pane active" id="1">
+                <ul class="tag-list">
+                    {% if widgets.tags.mytags is empty %} Oeps.. het lijkt er op dat je geen tags hebt,
+                    <br />voeg snel je eerste <a href="#" class="add-tag">tag</a> toe! 
+                    {% else %} 
+                    {% for var in widgets.tags.mytags %}
+                    <li>
+                        <a class="tag-by-me" href="{{var.tag}}" data-id="{{var.tag}}">#{{var.tag}}</a>
+                    </li>
+                    {% endfor %}
+                    <i class="fas fa-plus-square add-tag"></i>
+                    {% endif %}
+
+                </ul>
+            </div>
+            <div class="tab-pane" id="2">
+                <ul class="tag-list">
+                    {% if widgets.tags.alltags is empty %} Er is nog geen tag gevoegd door een van onze leden, ben jij de eerste? <a herf="#" class="add-tag">voeg</a> toe! {% else %} 
+                    {% for var in widgets.tags.alltags %}
+                    <li>
+                        <a class="tag-by-me" href="#" data-id="{{var.tag}}">#{{var.tag}}</a>
+                    </li>
+                    {% endfor %} 
+                    
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="showtags" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Andere {{sitename}}-leden die de tag #<span id="tag"></span> gebruiken</h5>
+            </div>
+            <div class="modal-body">
+                <div style="padding-top: 10px;">
+                  <table class="table table-striped" style="margin-bottom: 0;">
+                    <thead>
+                      <tr>
+                        <th width="10%" style="padding: 5px; border-bottom: 1px solid #ddd;"></th>
+                        <th width="60%" style="padding: 5px; border-bottom: 1px solid #ddd;">{{sitename}}naam</th>
+                        <th width="30%" style="padding: 5px; border-bottom: 1px solid #ddd;">Laatst online</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tagres">
+                    </tbody>
+                  </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                  <div id="pageNavPosition"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+<style>
+.pg-normal {
+    color: black;
+    font-weight: normal;
+    text-decoration: none;    
+    cursor: pointer;    
+}
+
+.pg-selected {
+    color: black;
+    font-weight: bold;        
+    text-decoration: underline;
+    cursor: pointer;
+}
+</style>
+

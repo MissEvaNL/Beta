@@ -1,0 +1,456 @@
+
+
+body{
+background-image: url(/templates/brain/style/images/bg_rooms.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: fixed;
+    background-color: #ecebeb;
+    color: #525050;
+    font-family: 'Open Sans',sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.users-online{font-weight:600;color:black;font-family:"Open Sans";font-size:16.5px;float:right;margin-top:15px;}
+.subimage4{background:url(../../style/templates/brain/style/images/register/reg0.png);height:75px;box-shadow:inset 0px 0px 15px 0px rgba(0,0,0,1);width:75px;border-radius:40px;background-position:155px 143px;float:left;top:10px;position:relative;left:10px;margin-right:30px;margin-bottom:50px;}
+.subimage3{background:url(../../style/templates/brain/style/images/register/reg1.png);height:75px;box-shadow:inset 0px 0px 15px 0px rgba(0,0,0,1);width:75px;border-radius:40px;background-position:155px 143px;float:left;top:10px;position:relative;left:10px;margin-right:30px;margin-bottom:50px;}
+.subimage2{background:url(../../style/templates/brain/style/images/register/reg2.png);height:75px;box-shadow:inset 0px 0px 15px 0px rgba(0,0,0,1);width:75px;border-radius:40px;background-position:73px 126px;float:left;top:10px;position:relative;left:10px;margin-right:30px;margin-bottom:50px;}
+.subimage1{background:url(../../style/templates/brain/style/images/register/reg3.png);height:75px;box-shadow:inset 0px 0px 15px 0px rgba(0,0,0,1);width:75px;border-radius:40px;float:left;top:10px;position:relative;left:10px;margin-right:30px;margin-bottom:50px;}
+.subscr{overflow: hidden;background: #2196f3;height:75px;box-shadow:inset 0px 0px 15px 0px rgba(0,0,0,1);width:75px;border-radius:40px;float:left;top:10px;position:relative;left:5px;margin-right:14px;margin-bottom:10px;}
+.ducket{height: 26px; width: 190px; background: url(../../style/templates/brain/style/images/register/ducket.png); background-repeat: no-repeat; margin-left: 250px; text-align: center; color: #fff; font-size: 13px; }
+.hotelview{background-image: url('https://habboo-a.akamaihd.net/c_images/reception/paris15_background_right.png'); background-position:393px -180px; background-repeat: no-repeat;}
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.orange .room .friends {
+    background-image: url(/templates/brain/style/images/friends.png);
+    width: 584px;
+    height: 475px;
+    position: absolute;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+
+.footer:visited {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+.panel {
+  margin-bottom: 21px;
+  background-color: #ffffff;
+border-top: 3px solid #d2d2d0;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+@media (min-width: 992px)
+.col-lg-4 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 33.3333333333%;
+    flex: 0 0 33.3333333333%;
+    /* max-width: 33.3333333333%; */
+}
+
+.champ span {
+    float: left;
+    width: 100%;
+    color: #999;
+    font-size: 12px;
+    margin-top: -1px;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+}
+
+.navbar .sub-menu:before {
+    border-bottom: 7px solid transparent;
+    border-left: none;
+    border-right: 7px solid rgba(0, 0, 0, 0.2);
+    border-top: 7px solid transparent;
+    left: -7px;
+    top: 10px;
+}
+.errorSucces
+{
+	background: #28bb20;
+	border-radius: 2px;
+	color: #fff;
+	display: none;
+	font-size: 13px;
+	line-height: 40px;
+	margin-bottom: 8px;
+	padding: 0 10px;
+	text-align: center;
+	overflow: hidden;
+}
+.navbar .sub-menu:after {
+    border-top: 6px solid transparent;
+    border-left: none;
+    border-right: 6px solid #fff;
+    border-bottom: 6px solid transparent;
+    left: 10px;
+    top: 11px;
+    left: -6px;
+}
+.dropdown-menu > li > a {
+color:	#353535;
+height: 40px;
+line-height: 270%;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  text-decoration: none;
+  color: #141414;
+  border-left: ridge #2196f3;	
+  background-color: #CCFFFF;
+}
+
+.habbo-plate{position:absolute;top:98px;margin-left: 20px;background:url(../../style/templates/brain/style/images/register/info_habbo_plate.png) no-repeat 2px -162px;text-align:center;height:138px;position:absolute;width:96px}
+.habbo-plate:hover{background-position:2px 75px}
+
+.navbar-default .navbar-nav > li > a:hover {
+background: #CCFFFF;
+
+color: #353535;	
+}
+.navbar-default .navbar-nav > li > a {
+	
+color: #353535;	
+}
+
+   /* Pattern styles */
+   body{
+   overflow: hidden;
+   }
+   .splitter {
+   background: linear-gradient(
+   to right, 
+   #fff 0%, 
+   #fff 50%, 
+   rgba(76, 62, 60, 0.25) 50%,
+   rgba(76, 62, 60, 0.25) 100%
+   );
+   height: 100%;
+   width: 100%;
+   margin-top: -66px;
+   }
+   .orange .active {
+   opacity: 1!important;
+   }
+   .white {
+   width: 50%;
+   overflow: hidden;
+   float: left;
+   position: relative;
+   top: 30%;
+   }
+   .orange {
+   width: 50%;
+   position: relative;
+   overflow: hidden;
+   float: right;
+   top: 30%;
+   }
+   .orange .content {
+   max-width: 710px;
+   padding: 0 20px;
+   margin: 0 auto;
+   text-align: center;
+   position: relative;
+   }
+   .orange .room {
+   height: 475px;
+   position: relative;
+   }
+   .orange h2 {
+   font-size: 30px;
+   color: #fff;
+   text-shadow: 0 1px 2px rgba(0,0,0,.2);
+   margin-top: 96px;
+   }
+   .orange p {
+   font-size: 14px;
+   color: #fff;
+   text-shadow: 0 1px 2px rgba(0,0,0,.2);
+   margin: 24px 0;
+   }
+   .orange .room_1 {
+   background-image: url(/templates/brain/style/images/room1.png);
+   width: 750px;
+   height: 410px;
+   position: absolute;
+   opacity: 0;
+   transition: all 1s;
+   filter: drop-shadow(0 6px rgba(0,0,0,0.2));
+   }
+   .orange .room_2 {
+   background-image: url(/templates/brain/style/images/room2.png);
+   width: 750px;
+   height: 410px;
+   position: absolute;
+   opacity: 0;
+   transition: all 1s;
+   filter: drop-shadow(0 6px rgba(0,0,0,0.2));
+   }
+   .orange .room_3 {
+   background-image: url(/templates/brain/style/images/room3.png);
+   width: 750px;
+   height: 410px;
+   position: absolute;
+   opacity: 0;
+   transition: all 1s;
+   filter: drop-shadow(0 6px rgba(0,0,0,0.2));
+   }
+   .orange .room_4 {
+   background-image: url(/templates/brain/style/images/furni.png);
+   width: 750px;
+   height: 410px;
+   position: absolute;
+   opacity: 0;
+   transition: all 1s;
+   filter: drop-shadow(0 6px rgba(0,0,0,0.2));
+   }
+   .indexHomes {
+   background-image: url(https://habboo-a.akamaihd.net/c_images/article_images_nl/the_list.gif);
+   width: 290px;
+   height: 350px;
+   }
+   .orange .room .box_msg {
+   background-color: #fff;
+   width: 328px;
+   padding: 10px 10px;
+   border-radius: 4px;
+   box-shadow: 0 0 0 1px rgba(0,0,0,.2);
+   position: absolute;
+   left: 225px;
+   top: 250px;
+   opacity: 0;
+   transition: all 1s;
+   }
+   .orange .room .box_msg:before {
+   content: "";
+   width: 0;
+   height: 0;
+   border-style: solid;
+   border-width: 10px 0 0 10px;
+   border-color: transparent transparent transparent #fff;
+   filter: drop-shadow(-1px 0 rgba(0,0,0,0.2)) drop-shadow(0 -1px rgba(0,0,0,0.2));
+   position: absolute;
+   top: -10px;
+   left: 30px;
+   }
+   .orange .room .box_msg h3 {
+   font-size: 20px;
+   color: #444;
+   text-align: left;
+   float: left;
+   margin-bottom: 12px;
+   }
+   .orange .room .box_msg p {
+   line-height: 20px;
+   font-size: 14px;
+   color: #666;
+   text-shadow: none;
+   margin-bottom: 18px;
+   text-align: left;
+   }
+   .white .box_msg2 {
+   width: 420px;
+   padding: 10px 10px;
+   /* border-radius: 4px; */
+   /* box-shadow: 0 0 0 1px rgba(0,0,0,.2); */
+   position: fixed;
+   left: 300px;
+   top: 120px;
+   /* transition: all 1s; */
+   }
+   .white .box_msg2 p {
+   margin-left: -100px;  
+   }
+   .navbar-light .navbar-brand {
+   color: #fff;
+   }
+   bg-light {
+   background-color: #4c4c4c8c !important;
+   }
+   .white .box_msg2 h3 {
+   font-size: 20px;
+   color: #444;
+   text-align: left;
+   float: left;
+   margin-bottom: 12px;
+   }
+   .white .box_msg2 p {
+   line-height: 20px;
+   font-size: 14px;
+   color: #666;
+   text-shadow: none;
+   margin-bottom: 18px;
+   text-align: center;
+   }
+   .orange p {
+   font-size: 14px;
+   color: #fff;
+   text-shadow: 0 1px 2px rgba(0,0,0,.2);
+   margin: 24px 0;
+   }
+   .orange .room #welcomeHome {
+   background-image: url(/templates/brain/style/images/avatares.png);
+   background-position: 202 0;
+   width: 51px;
+   height: 89px;
+   position: absolute;
+   left: 234px;
+   top: 146px;
+   opacity: 0;
+   transition: all .5s;
+   }
+   .white .content {
+   max-width: 460px;
+   padding: 0 20px;
+   margin: 0 auto;
+   text-align: center;
+   }
+   .footer {
+   position: absolute;
+   background: url(https://images.habbo.com/c_images/reception/val14_background_right.png);
+   left: 0;
+   bottom: 0;
+   width: 30%;
+   /* text-align: center; */
+   height: 400px;
+     background-repeat: no-repeat;
+     background-position: left;
+       -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+     
+   }
+   .white input {
+   border: none;
+   padding: 0 20px;
+   padding-right: 74px;
+   width: calc(100% + 99px);
+   height: 56px;
+   margin: 10px 0;
+   border-radius: 3px;
+   box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+   font-weight: 400;
+   font-size: 14px;
+   color: #666;
+   transition: all .2s;background: transparent;
+   }
+   #login.active {
+   opacity: 1;
+   display: block;
+   -webkit-animation: fadeIn 1.5s;
+   animation: fadeIn 1.5s;
+   }.white .imager {
+   width: 64px;
+   height: 96px;
+   margin-right: -80px;
+   margin-top: -106px;
+   position: relative;
+   float: right;
+   }
+   .white .forgot_password {
+   background-image: url(/templates/brain/style/images/key.png);
+   background-repeat: no-repeat;
+   background-position: left center;
+   margin: 0 -85px;
+   padding-left: 26px;
+   height: 56px;
+   line-height: 58px;
+   margin-top: -66px;
+   font-size: 14px;
+   color: #aaa;
+   position: relative;
+   float: right;
+   cursor: pointer;
+   }
+   .white h2 {
+   font-size: 30px;
+   color: #444
+   }
+   .white p {
+   font-size: 14px;
+   color: #888;
+   margin: 24px 0;
+   }
+   div.a {
+   text-align: center;
+   }
+   @-moz-keyframes arrow_top {
+   0% {
+   top: -10px
+   }
+   50% {
+   top: -40px
+   }
+   100% {
+   top: -10px
+   }
+   }
+   @-webkit-keyframes arrow_top {
+   0% {
+   top: -10px
+   }
+   50% {
+   top: -40px
+   }
+   100% {
+   top: -10px
+   }
+   }
+   @keyframes arrow_top {
+   0% {
+   top: -10px
+   }
+   50% {
+   top: -40px
+   }
+   100% {
+   top: -10px
+   }
+   }
+   .orange .arrow_top {
+   background-image: url(/templates/brain/style/images/arrow_top.png);
+   width: 46px;
+   height: 49px;
+   position: absolute;
+   margin-top: 80px;
+   left: calc(37.5% - 26px);
+   z-index: 100000;
+   -webkit-animation: arrow_top 1.5s infinite ease-in-out;
+   -moz-animation: arrow_top 1.5s infinite ease-in-out;
+   animation: arrow_top 1.5s infinite ease-in-out;
+   }
+

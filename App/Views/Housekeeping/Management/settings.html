@@ -1,0 +1,189 @@
+{% extends "Housekeeping/base.html" %}
+{% block title %}Settings{% endblock %}
+{% block body %}
+<div class="col-12 col-md-8 col-lg-9 col-xl-10 pl-lg-4">
+   <div class="row">
+      <div class="col-md-6">
+         <div class="card card-default widget animated" style="animation-delay: 0.34s;">
+            <div class="card-header">
+               <h5 class="card-title">CMS settings</h5>
+            </div>
+            <div class="card-body">
+               <form method="post" action="/housekeeping/settings/change">
+                  <div class="form-group row">
+                     <label for="example-text-input" class="col-3 col-form-label">Sitename</label>
+                     <div class="col-8">
+                        <input class="form-control" type="text" name="sitename" value="{{data.settings.sitename}}">
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Hotelname</label>
+                     <div class="col-8">
+                        <input class="form-control" type="text" name="hotelname" value="{{data.settings.hotelname}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Siteurl</label>
+                     <div class="col-8">
+                        <input class="form-control" type="text" name="siteurl" value="{{data.settings.siteurl}}"required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-number-input" class="col-3 col-form-label">Emulator</label>
+                     <div class="col-8">
+                        <select class="form-control" name="emulator" required>
+                        <option value="Plusemu" {% if data.settings.emulator == 'Plusemu' %} selected{% endif %}>Plusemu</option>
+                        <option value="Arcturus" {% if data.settings.emulator == 'Arcturus' %} selected{% endif %}>Arcturus</option>
+                        <option value="Comet" {% if data.settings.emulator == 'Comet' %} selected{% endif %}>Comet</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Recaptchakey</label>
+                     <div class="col-8">
+                        <input class="form-control" type="password" name="recaptchakey" value="{{data.settings.recaptchakey}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Motto</label>
+                     <div class="col-8">
+                        <input type="text" class="form-control" value="{{data.settings.motto}}" name="motto">
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">In onderhoud</label>
+                     <div class="col-8">
+                        <select class="form-control" name="maintenance" required>
+                        <option value="0" {% if data.settings.maintenance == 0 %} selected{% endif %}>Nee</option>
+                        <option value="1" {% if data.settings.maintenance == 1 %} selected{% endif %}>Ja</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-number-input" class="col-3 col-form-label">Credits</label>
+                     <div class="col-2">
+                        <input class="form-control" type="number" name="credits" value="{{data.settings.credits}}" required>
+                     </div>
+                     <label for="example-number-input" class="col-3 col-form-label">Diamanten</label>
+                     <div class="col-2">
+                        <input class="form-control" type="number" name="points" value="{{data.settings.points}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Duckets</label>
+                     <div class="col-2">
+                        <input type="number" class="form-control" value="{{data.settings.pixels}}" name="pixels">
+                     </div>
+
+                     <div class="col-12">
+                        <hr>
+                        <input type="hidden" name="cmssettings" value="cmssettings" />
+                        <button type="submit" class="btn btn-primary mb-2">Save</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="card card-default widget animated" style="animation-delay: 0.34s;">
+            <div class="card-header">
+               <h5 class="card-title">Client settings</h5>
+            </div>
+            <div class="card-body">
+              <form method="post" action="/housekeeping/settings/change">
+                  <div class="form-group row">
+                     <label for="example-text-input" class="col-3 col-form-label">Ipaddress</label>
+                     <div class="col-4">
+                        <input class="form-control" type="text" name="ipaddress" value="{{data.settings.ip}}">
+                     </div>
+                     <label for="example-email-input" class="col-2 col-form-label">port</label>
+                     <div class="col-2">
+                        <input class="form-control" type="number" name="port" value="{{data.settings.port}}" required>
+                     </div><i class="fas fa-info-circle" style="margin-top: 7px;" data-toggle="tooltip" title="" data-original-title="Dit topic is gesloten"></i>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Swf-link</label>
+                     <div class="col-4">
+                        <input class="form-control" type="text" name="habboswf" value="{{data.settings.habboswf}}" required>
+                     </div>
+                     <label for="example-email-input" class="col-1 col-form-label">/</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" name="habboswffolder" value="{{data.settings.habboswffolder}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Externaltexts</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="externaltexts" value="{{data.settings.externaltexts}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Overridetexts</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="overridetexts" value="{{data.settings.overridetexts}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Extern variables</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="externalvariables" value="{{data.settings.externalvariables}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Overidevariables</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="overridevariables" value="{{data.settings.overridevariables}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Furnidata</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="furnidata" value="{{data.settings.furnidata}}" required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Productdata</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text" value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="productdata" value="{{data.settings.productdata}}"  required>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-3 col-form-label">Flashclient</label>
+                     <div class="col-3">
+                        <input class="form-control" type="text"  value="{{data.settings.habboswffolder}}" disabled>
+                     </div>
+                     <div class="col-5">
+                        <input class="form-control" type="text" name="flashclient" value="{{data.settings.flashclient}}" required>
+                     </div>
+                     <div class="col-12">
+                        <hr>
+                        <input type="hidden" name="clientsettings" value="clientsettings" />
+                        <button type="submit" value="clientsettings" class="btn btn-primary mb-2">Save</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

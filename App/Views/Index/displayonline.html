@@ -1,0 +1,7 @@
+{% if online|length < 1 %}
+  OP DIT MOMENT IS ER NIEMAND IN HET HOTEL
+{% elseif online|length == 1 %} 
+  <a href="/online" style="color: white;">OP DIT MOMENT IS ER {{online|length}} TALPA ONLINE</a>
+{% elseif online|length > 1 %}
+<a href="/online" style="color: white;">OP DIT MOMENT ZIJN ER {{online|length}} TALPA'S ONLINE</a>
+{% endif %}

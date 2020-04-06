@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% set object = 'staff' %}
+{% block title %}Medewerkers{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+           {% for employee in data.employee %}
+           {% if employee.users is not empty %}
+            <div class="content">
+               <h3 style="margin-top: 0;">{{employee.name}}</h3>
+               <div class="row" style="padding: 10px;">
+                  {% for user in employee.users %}
+                  <div class="col-md-4" style="padding-right: 5px; padding-left: 5px;">
+                     <div class="sl-item">
+                        <div class="sl-avatar">
+                           <div style="background: url(http://www.habbo.nl/habbo-imaging/avatarimage?figure={{user.look}}&head_direction=3&headonly=1) no-repeat center; width: 48px; height: 62px;"></div>
+                        </div>
+                        <div class="sl-info" style="margin-left: 56px;">
+                           <strong>
+                              <div class="user-style"><a href="/profile/{{user.username}}" data-toggle="tooltip" data-placement="top"><span class="user-icon jarofhearts"></span> <span class="user-style {{user.font}}">{{user.username}}</span></a></div>
+                           </strong>
+                           <div class="sl-title">{{user.role}}</div>
+                        </div>
+                        <div class="sl-extra" style="margin-left: 50px;">
+                           <div class="sl-country" style="float: left; margin-left: 10px;">
+                              <img src="https://www.countryflags.io/{{user.country}}/shiny/64.png" width="20" height="20">
+                           </div>
+                           <div class="sl-contact" style="margin-left: 10px; float: left;">
+                              <a href="/login" data-toggle="tooltip" title="" data-placement="bottom" disabled="" data-original-title="Login to start a private conversation"><img src="https://www.habbobites.com/images/icons/mail_icon.gif"></a>
+                           </div>
+                           <div class="sl-about" style="float: left; margin-left: 10px;" data-toggle="tooltip" data-placement="bottom" title="">
+                              {% if user.online == false %}
+                                  <img class="hc-icon offline" src="https://www.habbocreate.com/images/icons/offline.gif" title="">
+                              {% else %}
+                                  <img class="hc-icon offline" src="https://www.habbocreate.com/images/icons/online.gif" title="">
+                              {% endif %} 
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         {% endif %}
+        {% endfor %}
+          </div>
+         <div class="col-md-4">
+            <div class="content">
+               <div class="title">Meet the team</div>
+               <img src="http://habbobites.com/images/site/superhero.gif" style="float: right;">
+               <p>{{sitename}} zal nooit groot worden zonder al onze getalenteere hulp troepen. Op deze pagina vind je wie werkzaam zijn voor {{hotelname}}!</p>
+            </div>
+            <div class="content">
+               <div class="title">Join the team</div>
+               <img src="http://habbobites.com/images/site/jointeam-sunny.png" style="float: right;">
+               <p>{{sitename}} is altijd op zoek naar spelers die hun steentje willen bij dragen aan het hotel. Denk jij één van onze onderstaande teams te kunnen versterken?</p>
+              <p>
+                Laat dan snel je <a href="#">sollicitatie achter!</a
+              </p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% set object = 'settings' %}
+{% block title %}Mijn instellingen{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+            <div class="content">
+               <h3 style="margin-top: 0; margin-bottom: 20px;">Profiel instellingen</h3>
+                  <form method="post" action="/account/profile-settings">
+                  <div class="form-group">
+                     <label for="bio">Profiel biografie</label>
+                     <textarea class="form-control" rows="3" name="bio" id="bio" maxlength="500">{{data.settings.profile_bio}}</textarea>
+                     <p class="help-block">Deel een beetje over jezelf, maar geen persoonlijke informatie!</p>
+                  </div>
+                  <div class="form-group">
+                     <label for="style">Kleur gebruikersnaam <a href="/shop">(winkel)</a></label>
+                     <select class="form-control" name="colorfont" id="colorfont">
+                        <option value="0">Default</option>
+                        {% for font in data.fonts %}
+                        <option value="{{font.item_id}}" {% if data.settings.item_font == font.item_id %}selected=""{% endif %}>{{font.image|capitalize}}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <div class="checkbox">
+                        <label>
+                        <input type="checkbox" name="privateprofile" id="privateprofile" {% if data.settings.private_profile == 1 %}value="0" checked="checked"{% else %}value="1"{% endif %}> Maak profiel prive
+                        </label>
+                     </div>
+                  </div>
+                  <div class="form-group"></div>
+                  <button type="submit" class="btn btn-default">Opslaan</button>
+               </form>
+            </div>
+         </div>
+          {% include 'Account/navbar.html' %}
+   </div>
+</div>
+{% endblock %}

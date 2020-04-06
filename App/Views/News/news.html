@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% set object = 'news' %}
+{% block title %}Nieuwsoverzicht{% endblock %}
+{% block body %}
+
+<div id="main-wrapper">
+<div class="container">
+<div class="row content-box">
+<div class="col-md-8">
+<div class="banner-header" style="background: url(/templates/brain/style/images/1567fb58ce57xc_xjkjn29js.png) center; margin-bottom: 10px; color: white; padding: 20px;">
+<div class="bh-title" style="font-size: 22px;">{{sitename}} nieuws</div>
+<div class="bh-desc">Alle nieuws en feiten voor jou op een rij!</div>
+</div>
+  {% include 'Pagination/Modules/navigation.html' %}
+<div class="home-articles">
+{% for item in data.news %}
+<a href="/news/article/{{item.id}}">
+<div class="ha-article">
+<div class="ha-thumbnail" style="background: url({{item.image}}) center;"></div>
+<div class="ha-content">
+<div class="ha-title">[{{item.category}}] {{item.title}}</div>
+<div class="ha-story">
+{{item.shortstory}} </div>
+</div>
+</div>
+</a>
+{% endfor %}
+
+</div>
+</div>
+
+
+{% endblock %}

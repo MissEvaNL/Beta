@@ -1,0 +1,105 @@
+{% extends "Housekeeping/base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="col-12 col-md-8 col-lg-9 col-xl-10 pl-lg-4">
+<div class="row">
+
+      <div class="col-md-12">
+         <div class="card card-default widget animated" style="animation-delay: 0.34s;">
+            <div class="card-header">
+               <h5 class="card-title">Room Info</h5>
+               <h6 class="card-subtitle text-muted">Room Info of <strong>Onacceptabel voor het Hotel Management</strong></h6>
+            </div>
+            <div class="card-body">
+               <form method="post">
+                  <div class="form-group row">
+                     <label for="example-text-input" class="col-2 col-form-label">Room Name</label>
+                     <div class="col-10">
+                        <input class="form-control" type="text" name="roomName" value="Onacceptabel voor het Hotel Management" id="example-text-input" disabled>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-text-input" class="col-2 col-form-label">Room Description</label>
+                     <div class="col-10">
+                        <input class="form-control" type="text" name="roomDesc" value="Kom voor gratis credits!!!!!!!!!!" id="example-text-input" disabled>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-email-input" class="col-2 col-form-label">Owner</label>
+                     <div class="col-10">
+                        <input class="form-control" type="text" name="roomOwner" value="Metus" id="example-email-input" disabled>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-number-input" class="col-2 col-form-label">Room type</label>
+                     <div class="col-10">
+                        <select class="form-control" name="roomType" required>
+                           <option value="1" selected>PRIVATE</option>
+                           <option value="2" selected>PUBLIC</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-number-input" class="col-2 col-form-label">Access type</label>
+                     <div class="col-10">
+                        <select class="form-control" name="accessType" required>
+                           <option value="1">Open</option>
+                           <option value="2">Doorbell</option>
+                           <option value="3">Password</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-group row">
+                     <label for="example-number-input" class="col-2 col-form-label">Max users</label>
+                     <div class="col-10">
+                        <select class="form-control" name="maxUsers" required>
+                           <option value="1">1</option>
+                           <option value="2">10</option>
+                           <option value="3">15</option>
+                           <option value="4">20</option>
+                           <option value="5">25</option>
+                           <option value="6">30</option>
+                           <option value="7">40</option>
+                           <option value="8">50</option>
+                           <option value="9">100</option>
+                           <option value="10">150</option>
+                           <option value="11">200</option>
+                           <option value="12">300</option>
+                           <option value="13">400</option>
+                           <option value="14">500</option>
+                           <option value="15">1000</option>
+                        </select>
+                     </div>
+
+                  </div>
+               </form>
+                                      <hr>
+                        <button type="submit" class="btn btn-primary mb-2">Save</button>
+                     </div>
+            </div> 
+         </div>
+   
+                     <div class="col-12">
+                        <div class="card card-default widget">
+                           <div class="card-header">
+                              <h5 class="card-title">Room Bans</h5>
+                           </div>
+                           <div class="card-body">
+                              <table id="logs" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                 <thead>
+                                    <tr>
+                                       <th>#</th>
+                                       <th>Username</th>
+                                       <th>Expire</th>
+                                       <th>Action</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+</div>
+   </div>
+</div>
+{% endblock %}

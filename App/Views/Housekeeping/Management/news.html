@@ -1,0 +1,130 @@
+{% extends "Housekeeping/base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="col-12 col-md-8 col-lg-9 col-xl-10 pl-lg-4">    
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ximwo5y97dtfrnc60p0d3bt43tgla29a83es2owf5uwib1v2"></script>
+    <script>
+        tinymce.init({
+            selector:   "textarea",
+            width:      '100%',
+            height:     270,
+            plugins:    "advlist autolink lists link image charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textcolor colorpicker textpattern imagetools codesample",
+            statusbar:  true,
+            menubar:    true,
+            toolbar:    "undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+    </script>
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-default widget">
+                    <div class="card-header">
+                        <h5 class="card-title">Create news</h5>
+                        <h6 class="card-subtitle text-muted">Publish news article on the website.</h6>
+                    </div>
+
+                    <div class="card-body">
+                        <form method="post" action="/housekeeping/manage/news/create">
+                            <div class="form-group row">
+                                <label for="title-input" class="col-2 col-form-label">Title</label>
+                                <div class="col-10">
+                                    <input type="text" name="title" class="form-control" id="title-input" value="{{newstitle}}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="desc-input" class="col-2 col-form-label">Description</label>
+                                <div class="col-10">
+                                    <input type="text" name="description" class="form-control" id="desc-input" value="{{description}}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="desc-input" class="col-2 col-form-label">Form</label>
+                                <div class="col-10">
+                                    <select name="form" class="form-control" required>
+                                        {% for category in data.category %}
+                                            <option value="{{category.id}}">{{category.category}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-2 col-form-label">Header Image</label>
+                                <div class="col-4">
+                                    <input type="text" name="header" class="form-control" id="header-input" value="" required>
+                                </div>
+
+                                <label for="example-text-input" class="col-2 col-form-label">Article Image</label>
+                                <div class="col-4">
+                                    <input type="text" name="images" class="form-control" id="image-input" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="body-input" class="col-2 col-form-label">Story</label>
+                                <div class="col-10">
+                                    <textarea name="body" id="body-input">{{message}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="body-input" class="col-2 col-form-label"></label>
+                                <div class="col-10">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block">
+                                        Create news
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if data.newsArticles is defined %}
+            <div class="col-md-12">
+                <div class="card card-default widget">
+                    <div class="card-header">
+                        <h5 class="card-title">Manage news</h5>
+                            <h6 class="card-subtitle text-muted">Edit or delete a news article on the website.</h6>
+                    </div>
+
+                    <table id="newsList" class="table" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>By</th>
+                                <th>Timestamp</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for news in data.newsArticles %}
+                              <tr>
+                                <td>{{news.id}}</td>
+                                <td>{{news.title}}</td>
+                                <td data-toggle="modal" data-target="#actionModal" data-id="{{news.author}}"><a href="#">{{news.author}}</a></td>
+                                <td>{{news.date|time_diff}}</td>
+                                <td class="table-action"><a href="#"><i class="align-middle fas fa-fw fa-pen"></i></a> <a href="#"><i class="align-middle fas fa-fw fa-trash"></i></a></td>
+                              </tr>
+                            {% endfor %}
+						          </tbody>
+                    </table>
+
+                </div>
+            </div>
+            {% endif %}
+       <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+      $('#newsList').DataTable({
+          order: [[ 0, "desc" ]],
+          lengthChange: 1,
+          responsive: true
+      });
+      });
+      </script>
+        </div>
+    </div>
+{% endblock %}

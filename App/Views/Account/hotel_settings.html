@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% set object = 'hotelsettings' %}
+{% block title %}Hotel instellingen{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+            <div class="content">
+               <h3 style="margin-top: 0; margin-bottom: 20px;">Hotel instellingen</h3>
+               <p style="margin-bottom: 10px">Pas de instellingen van je account aan.</p>
+               <form method="POST" action="/" class="web-form">
+<table class="table" style="margin: 10px">
+  <caption>Dit zijn de instellingen voor in het hotel. Als je deze instellingen aanpast is het aangeraden even opnieuw het hotel in te gaan.
+Deze instellingen worden automatisch opgeslagen zodra je iets aanpast.</caption>
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Vriendenverzoeken toestaan?</th>
+      <td><label class="switch">
+            <input class="hotel-settings" data-id="block_newfriends" type="checkbox" {% if data.settings.block_newfriends == 1 %}checked{% endif %}>
+            <span class="slider round" style="width:60px"></span>
+           </label>
+      </td>
+    </tr>
+        <tr>
+      <th scope="row">{{sitename}}'s kunnen zien dat je online bent?</th>
+      <td><label class="switch">
+            <input class="hotel-settings" data-id="hide_online" type="checkbox" {% if data.settings.hide_online == 1 %}checked{% endif %}>
+            <span class="slider round" style="width:60px"></span>
+           </label>
+      </td>
+    </tr>
+            <tr>
+      <th scope="row">{{sitename}}'s mogen je volgen in de kamers van {{sitename}}?</th>
+      <td><label class="switch">
+            <input class="hotel-settings" data-id="hide_inroom" type="checkbox" {% if data.settings.hide_inroom == 1 %}checked{% endif %}>
+            <span class="slider round" style="width:60px"></span>
+           </label>
+      </td>
+    </tr>
+                <tr>
+      <th scope="row">Wil je dat andere {{sitename}}'s met jou een ruil kunnen starten?</th>
+      <td><label class="switch">
+            <input class="hotel-settings" data-id="trading_locked" type="checkbox" {% if data.settings.trading_locked == 1 %}checked{% endif %}>
+            <span class="slider round" style="width:60px"></span>
+           </label>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+               </form>
+            </div>
+         </div>
+         {% include 'Account/navbar.html' %}
+      </div>
+   </div>
+</div>
+<style>
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+{% endblock %}

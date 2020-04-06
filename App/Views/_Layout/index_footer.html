@@ -1,0 +1,80 @@
+<style>
+.footer {
+	position: relative;
+	overflow:hidden;
+	background: rgba(0,0,0,0.9);
+	padding-top: 5px;
+	padding-bottom: 5px;
+	height: 65px;
+	width: 100%;
+	color: #FFF;
+	bottom: 0px;
+	margin-top: 15px;
+}
+
+.footer 	.inner {
+	position: relative;
+    	width: 1140px;
+	color: #ffffff;
+    	margin: 0 auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-family: 'Ubuntu Condensed', 'Ubuntu';
+	font-size: 13px;
+	text-transform: uppercase;
+}
+</style>
+<div class="footer">
+<div class="inner">
+<img src="" align="left" style="margin-left: -45px; margin-right: -35px; margin-top: -20px;"/>
+<b>TalpaCMS - Versie 1.0</b><br><small>
+&#169; 2020| Er mag niets gekopieerd worden zonder toestemming van de scripter en/of ontwerper.</small></div>
+</div>
+
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+
+      <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+      <script data-cfasync="false" type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
+      <script src="/templates/brain/style/js/jquery.avatargenerate.js?v=17" type="text/javascript"></script>
+      <script src="/assets/js/app.js"></script>
+
+      <script src="/assets/js/pnotify.custom.min.js?v=1.0"></script>
+      <script src="/js/modal.js"></script>
+
+      <script type="text/javascript">
+          $(function () {
+
+            {% for message in flash_messages %} 
+                {% if message.type == 'error' %}
+                    new PNotify({
+                         title: 'Oeps!',
+                         text: '{{ message.body }}',
+                         type: 'error',
+                     });
+                {% endif %}
+                {% if message.type == 'success' %}
+                    new PNotify({
+                         title: 'Jeuj!',
+                         type: 'success',
+                         text: '{{ message.body }}',
+                     });
+                {% endif %}
+                {% if message.type == 'warning' %}
+                    new PNotify({
+                         title: 'Oeps..!',
+                         text: '{{ message.body }}',
+                         type: 'warning'
+                     });
+                {% endif %}
+            {% endfor %}
+
+          })
+
+          function recaptchaCallback() {
+            $('#submitBtn').removeAttr('disabled');
+          };
+      </script>
+   </body>
+</html>

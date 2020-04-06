@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% set object = 'transactions' %}
+{% block title %}Transacties{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+            <div class="content">
+               <h3 style="margin-top: 0; margin-bottom: 20px;">Transacties</h3>
+               <p>Je laatste transacties in een rijtje!</p>
+              <table id="transactions" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                 <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Cadeau</th>
+                      <th scope="col">Aantal</th>
+                      <th scope="col">Ontvangen van</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    {% for transaction in data.transactions %}
+                    <tr>
+                      <th scope="row">{% if transaction.to_user_id == current_user.id and current_user.id != transaction.from_user_id %}Bij{% else %}Af{% endif %}</th>
+                      <td>{{transaction.description|capitalize}}</td>
+                      <td>{{transaction.gift}}</td>
+                      <td>{% if transaction.from_user_id == 0 %}{{hotelname}}{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                 </tbody>
+              </table>
+            </div>
+         </div>
+        {% include 'Account/navbar.html' %}
+      </div>
+   </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+    $('#transactions').DataTable({
+        order: false,
+        lengthChange: 1,
+        responsive: true
+    });
+});
+</script>
+{% endblock %}

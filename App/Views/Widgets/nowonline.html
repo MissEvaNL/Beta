@@ -1,0 +1,15 @@
+<div class="content-header habbos">
+<div class="content-header-title">Wie is er online?</div>
+<div class="content-header-desc">Al gekeken of je vriend/in online is?</div>
+</div>
+<div class="content">
+<div class="online-users">
+    {% for beta in online %}
+    <div class="user-style">
+        <a href="/profile/{{beta.username}}" data-toggle="tooltip" data-placement="top">
+        <span class="user-style red">{{beta.username}}</span></a>,
+    </div> 
+{% endfor %}
+  </div>
+
+</div></div>

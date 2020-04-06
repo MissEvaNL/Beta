@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% set object = 'accountsettings' %}
+{% block title %}Account instellingen{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+            <div class="content">
+               <h3 style="margin-top: 0; margin-bottom: 20px;">Account instellingen</h3>
+               <p>Pas de instellingen van je account aan.</p>
+               <form method="POST" action="/account/user-settings" class="web-form">
+                  <div class="form-group">
+                     <label for="email">Email adres</label>
+                     <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{current_user_information.mail}}">
+                     <p class="help-block">Je email adres wordt niet openbaar gepubliceerd! </p>
+                     <p class="text-danger"><strong>Email nog niet activeerd</strong> <a href="#">Opnieuw versturen</a></p>
+                     <p></p>
+                  </div>
+                  <div class="form-group">
+                     <label for="password">Nieuw wachtwoord</label>
+                     <input type="password" class="form-control" id="password" name="password" placeholder="Wachtwoord">
+                     <p class="help-block">Laat dit leeg om ongewijzigd te blijven</p>
+                  </div>
+                  <hr>
+                  <div class="form-group" style="padding: 10px; background: #F5F5F5;">
+                     <label for="currpassword">Herhaal nieuw wachtwoord</label>
+                     <input type="password" class="form-control" id="currpassword" name="currpassword" placeholder="Wachtwoord">
+                     <p class="help-block">Voer je huidige wachtwoord opnieuw in om de wijzigingen op te slaan</p>
+                     <button type="submit" class="btn btn-default">Opslaan</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         {% include 'Account/navbar.html' %}
+        
+        <div class="col-md-4">
+          <div class="content">
+             <div class="title" style="margin-bottom: 10px">Stel je pincode in!</div>
+              <form method="POST" action="/account/changepin" class="web-form">
+               <div class="list-group">
+                <input type="password" name="pin" class="form-control" aria-describedby="passwordHelpBlock">
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                  Beveilig je account wanneer je een pin insteld, hackers krijgen dan minder snel toegang tot jouw account.
+                </small>
+                <p style="margin-top: 15px">
+                  <button type="submit" class="btn btn-default">Opslaan</button>
+                </p>
+              </div>
+             </form>
+          </div>
+        </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

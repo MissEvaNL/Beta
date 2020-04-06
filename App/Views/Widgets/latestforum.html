@@ -1,0 +1,38 @@
+    <div class="content-header party" href="/forum/latest"> 
+       <div class="content-header-title">Laatste topics</div>
+       <div class="content-header-desc">Bekijk wat nieuw is!</div>
+    </div>
+    <div class="content" style="padding-top: 10px;">
+      {% for topic in widgets.latestforum.latesttopics %}   
+       <div class="activity-item">
+          <div class="ai-title"><a href="/forum/thread/{{topic.id}}">{{topic.title}}</a></div>
+          <span style="float: right; font-style: italic; font-size: 13px; color: #333;">{{topic.created_at|time_diff}}</span>
+          <div class="ai-desc" style="font-size: 13px;">
+             <div class="user-style"><a href="/profile/{{topic.username}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="farkir-dk on Habbo"><span class="user-icon frog"></span> <span class="user-style {{topic.image}}">{{topic.username}}</span></a></div>
+          </div>
+       </div>
+       {% endfor %}
+    </div>
+    <div class="content-header space">
+       <div class="content-header-title">Laatste reacties</div>
+       <div class="content-header-desc">De aller eerste!</div>
+    </div>
+    <div class="content" style="padding-top: 10px;">
+      {% for post in widgets.latestforum.latestposts %}
+      <div class="activity-item" style="padding-left: 5px; padding-bottom: 5px;">
+          <div style="float: left;">
+             <div style="background: url(https://www.habbo.com/habbo-imaging/avatarimage?figure={{post.look}}&amp;head_direction=3&amp;headonly=1&amp;size=s); height: 30px; width: 27px;" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{post.username}}"></div>
+          </div>
+          <span data-toggle="tooltip" data-placement="top" title="" style="float: right; font-style: italic; font-size: 10px; color: #525050; margin-top: 6px;" data-original-title="{{post.created_at|time_diff}}">{{post.created_at|time_diff}}</span> 
+          <div class="ai-title" style="height: 30px; padding: 3px;">
+             {% set dateObj = post.created_at|date_modify("-12 hours") %}
+             {% if post.created_at >= dateObj %}
+                <span class="label label-success" style="font-size: 8px; vertical-align: 2px;">NEW</span>
+              {% endif %}
+              <a href="/forum/thread/{{post.topic_id}}" data-toggle="tooltip" title="" data-placement="top" data-original-title="Hi Jason.">{{post.title}}</a>
+          </div>
+       </div>
+
+      {% endfor %}
+    </div>
+

@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="btn-group" style="margin-left: 10px;">
+      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% if data.topic.is_closed == 1 %}disabled=""{% else %} href="/forum/thread/{{data.topic.id}}/reply#last"{% endif %}>
+        Reageer op topic
+    </button>
+  </div>
+  {% if current_user.rank >= modrank %}
+  <div class="btn-group" style="margin-left: 10px;">
+    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Tools
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item forum-close-thread" href="#" data-id="{{data.topic.id}}">{% if data.topic.is_closed == 1 %}Open topic{% else %}Sluit topic{% endif %}</a>
+      <a class="dropdown-item forum-sticky-thread" href="#" data-id="{{data.topic.id}}">{% if data.topic.is_sticky == 1 %}Verwijder sticky{% else %}Maak sticky{% endif %}</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item forum-delete-thread" href="#" data-id="{{data.topic.id}}">{% if data.topic.is_visible == 1 %}Verwijder topic{% else %}Open topic{% endif %}</a>
+    </div>
+  </div>
+  {% endif %}
+  <nav style="text-align: right; float: right;">
+    {% include 'Forum/Modules/pagination.html' with {
+        currentFilters: {
+          page: '/',
+        },
+        currentPage: 1,
+        paginationPath: '/forum/thread/' ~ data.topic.id,
+        showAlwaysFirstAndLast: true,
+        lastPage: totalPages,
+        urlType: 'slash',
+      } %}
+   </nav>
+</div>

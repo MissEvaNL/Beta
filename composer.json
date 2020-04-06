@@ -1,0 +1,19 @@
+{
+    "Name": "HabboxCMS",
+    "description": "CMS for Habbo that works on different emulators like Arcturus, Plusemu and Comet",
+    "require": {
+        "twig/twig": "~2.0",
+        "twig/extensions": "^1.5",  
+        "usmanhalalit/pixie": "2.*@dev",
+        "phpmailer/phpmailer": "^6.0",
+        "psr/log": "^1.0.0",
+        "chriskonnertz/bbcode": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/",
+            "Libaries\\": "Libaries/"
+        }
+    }
+}

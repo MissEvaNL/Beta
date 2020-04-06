@@ -1,0 +1,550 @@
+{% if current_user %}
+{% extends "permissions.html" %}
+{% set set_permission = permission %}
+{% block housekeeping %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Housekeeping | {{hotelname}}</title>
+      <link rel="icon" href="/assets/img/favicon.ico">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+      <link href="/assets/css/pnotify.custom.min.css?v=1" rel="stylesheet" type="text/css" />
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+      <style>
+         .select2-selection {
+         padding:4px;
+         background-color: #fff;
+         background-clip: padding-box;
+         color: #495057;
+         }
+         .select2 {
+         border: 1px solid #ced4da;
+         }
+         .select2-search__field {
+         padding: 4px;
+         width: 100%;
+         box-sizing: border-box;
+         border: 1px solid #acacac;
+         }
+         .ui-pnotify-container {
+         background: rgba(0, 0, 0, 0.85);
+         color: white !important;
+         border-radius: 0;
+         border-color: black !important;
+         }
+         .notification-red div.ui-pnotify-container {
+         background: rgba(125, 58, 58, 0.93);
+         border-color: rgba(125, 58, 58, 0.93) !important;
+         }
+         h4 {
+         font-size: 20px;
+         }
+         .ui-pnotify-text {
+         display: block;
+         font-size: 15px
+         }
+         .ui-pnotify-title {
+         margin-top: -4px;
+         color: #fff;
+         }
+      </style>
+      <!-- Theme -->
+      <link href="/templates/housekeeping/style/css/app.css" rel="stylesheet">
+   </head>
+   <body>
+      <div class="splash active">
+         <div class="splash-icon"></div>
+      </div>
+      <nav class="navbar navbar-expand navbar-dark bg-dark">
+         <div class="container">
+            <a class="navbar-brand" href="/">
+               <svg>
+                  <use xlink:href="#ion-ios-pulse-strong"></use>
+               </svg>
+               {{hotelname}} <small class="d-none d-sm-inline">| v1.0</small>
+            </a>
+            <div class="navbar-collapse collapse">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown ml-lg-2">
+                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">
+                     <span class="d-none d-lg-inline-block">Gebruiker</span>
+                     <span class="d-lg-none"><i class="align-middle fas fa-cog"></i></span>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="/client"><i class="align-middle mr-1 fas fa-fw fa-desktop"></i> Ga naar Talpa</a>
+                        <a class="dropdown-item" href="/dashboard"><i class="align-middle mr-1 fas fa-fw fa-desktop"></i> Ga terug naar de website</a>
+                        <a class="dropdown-item" href="/logout"><i class="align-middle mr-1 fas fa-fw fa-arrow-alt-circle-right"></i> Log uit van Housekeeping</a>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <div class="header">
+         <div class="container">
+            <div class="media text-white">
+               <img src="https://www.habbo.com/habbo-imaging/avatarimage?figure={{current_user_information.look}}&direction=3&head_direction=3&gesture=sml&headonly=1" class="avatar img-fluid rounded-circle mr-3" alt="Gebruiker" />
+               <div class="media-body">
+                  <h3 class="mb-1 text-white font-weight-normal">{{current_user_information.username}}</h3>
+                  <span class=" font-weight-normal">{{current_user_information.rank}}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <main class="content">
+         <div class="container">
+            <div class="row">
+               <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                  <a class="card d-block d-md-none mt-4" data-toggle="collapse" data-target="#sidebar">
+                     <div class="card-header">
+                        <h5 class="card-title mb-0">Menu</h5>
+                     </div>
+                  </a>
+                  <nav id="sidebar" class="collapse collapse-disabled-md sidebar sidebar-sticky">
+                     {% include 'Housekeeping/navbar.html' %}
+                  </nav>
+               </div>
+               {% block body %} {% endblock %} 
+            </div>
+         </div>
+      </main>
+      <div class="modal fade" id="actionModal" tabindex="-1" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="actionModalLabel">Action to</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="unbanModal" tabindex="-1" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="actionModalLabel">Action to</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="actionModalLabel">Are you sure to delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="contain animated bounce">
+                     <form id="form1" runat="server">
+                        <div class="alert"></div>
+                        <div id='img_contain'><img id="uploadImage" align='middle' src="" /></div>
+                        <div class="input-group-upload">
+                           <div class="custom-file">
+                              <input type="file" id="inputGroupFile01" class="imgInp custom-file-input" aria-describedby="inputGroupFileAddon01">
+                              <label class="custom-file-label" for="inputGroupFile01">Kies bestand</label>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="addWidgetModal" tabindex="-1" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="actionModalLabel">Action to widgets</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+             
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="widgetModal" tabindex="-1" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="actionModalLabel">Action to widgets</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+             
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="deletePermissionModal" tabindex="-1" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="actionModalLabel">Are you sure to delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="alertModalLabel">Alert User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form method="post">
+                     <label class="sr-only" for="inputUsername">Username</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                           <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" class="form-control" id="inputUsername" name="targetName" value="" placeholder="Username..." autocomplete="off" autofocus required>
+                     </div>
+                     <label class="sr-only" for="inputReason">Reason</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <select name="reason" class="form-control" required>
+                           <option value="1">Taalgebruik</option>
+                           <option value="2">Voordoen als Leet Staff</option>
+                           <option value="3">Praten over Retro Hotels</option>
+                           <option value="4">Vragen/weggeven van persoonlijke informatie</option>
+                           <option value="5">Leet's lastig vallen</option>
+                           <option value="6">Praten over Social Media</option>
+                        </select>
+                     </div>
+                     <label class="sr-only" for="inputReason">Extra</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <select name="extra" class="form-control" required>
+                           <option value="0">None</option>
+                           <option value="1">Disconnect</option>
+                           <option value="2">Kick</option>
+                           <option value="3">Mute</option>
+                        </select>
+                     </div>
+                     <input type="hidden" name="action" value="1">
+                     <input type="hidden" name="_token" value="{{token}}">
+                     <button type="submit" class="btn btn-primary mb-2">Alert</button>
+                     <button type="button" class="btn btn-secondary  mb-2" data-dismiss="modal">Close</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="banModal" tabindex="-1" role="dialog" aria-labelledby="banModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="banModalLabel">Ban User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form method="post" action="{{siteurl}}housekeeping/remote/control">
+                     <label class="sr-only" for="inputUsername">Username</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                           <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" class="form-control" id="inputUsername" name="element"  placeholder="Username..." autocomplete="off" autofocus required>
+                        <input type="hidden" name="object" value="banuser" />
+                     </div>
+                     <label class="sr-only" for="inputReason">Reason</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <select name="reason" class="form-control" required>
+                           {% for bans in data.banmessages %}
+                           <option value="{{bans.id}}">{{bans.message}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <label class="sr-only" for="inputTime">Time</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <select name="expire" class="form-control" id="inputTime" required>
+                           {% for bans in data.bantime %}
+                           <option value="{{bans.id}}">{{bans.message}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <label class="sr-only" for="inputReason">Type</label>
+                     <div class="input-group mb-2 mr-sm-2">
+                        <select name="type" class="form-control" required>
+                           <option value="user">User</option>
+                           <option value="ip">IP</option>
+                        </select>
+                     </div>
+                     <button type="submit" class="btn btn-primary mb-2">Check</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="/templates/housekeeping/style/js/app.js"></script>
+      <script src="/templates/housekeeping/style/js/housekeeping.js?v={{ date().timestamp }}"></script>
+      <script src="/templates/housekeeping/style/js/forms.js"></script>
+      <script src="/templates/housekeeping/style/js/tables.js"></script>
+      <script src="/assets/js/pnotify.custom.min.js?v=1"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js">"</script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+      <script>  
+         $( "tbody" ).sortable({
+             // Cancel the drag when selecting contenteditable items, buttons, or input boxes
+             cancel: ":input,button,[contenteditable]",
+             // Set it so rows can only be moved vertically
+             axis: "y",
+             // Triggered when the user has finished moving a row
+             update: function (event, ui) {
+                 // sortable() - Creates an array of the elements based on the element's id. 
+                 // The element id must be a word separated by a hyphen, underscore, or equal sign. For example, <tr id='item-1'>
+                 var data = $(this).sortable('serialize');
+         
+                 $.ajax({
+                     data: data,
+                     type: 'POST',
+                     url: '/housekeeping/api/set-order-' + $('table').attr('id'),
+                     success: function(response) {
+                         console.log(response);
+                     }
+                 });
+         
+             }
+         });
+           
+         $.fn.editable.defaults.mode = 'inline';     
+         
+           
+         $('.forum-title').editable({
+             type: 'text',
+             url: '/housekeeping/api/change-forum-input',
+             success: function(response, newValue) {
+               if(response.status == 'error'){
+                    new PNotify({
+                           title: 'Oops..!',
+                           text: response.msg,
+                           type: 'error',
+                       });
+               }
+             }
+         });
+         
+         $('.forum-description').editable({
+           type: 'text',
+           url: '/housekeeping/api/change-forum-input',
+           success: function(response, newValue) {
+               if(response.status == 'error'){
+                    new PNotify({
+                           title: 'Oops..!',
+                           text: response.msg,
+                           type: 'error',
+                       });
+               }
+           }
+         });
+           
+         $('.forum-category').editable({
+           type: 'text',
+           url: '/housekeeping/api/change-category-input',
+           success: function(response, newValue) {
+               if(response.status == 'error'){
+                    new PNotify({
+                           title: 'Oops..!',
+                           text: response.msg,
+                           type: 'error',
+                       });
+               }
+           }
+         });
+         
+         //make status editable
+         $('#status').editable({
+             type: 'select',        
+             inputclass: 'form-control',
+             placement: 'right',
+             value: 2,
+             source: [
+                 {value: 1, text: 'status 1'},
+                 {value: 2, text: 'status 2'},
+                 {value: 3, text: 'status 3'}
+             ]
+             /*
+             //uncomment these lines to send data on server
+             ,pk: 1
+             ,url: '/post'
+             */
+         });
+         
+         $('.targetRole, .changePermissions').select2({
+            placeholder: 'Select an role',
+            width: '92.5%',
+            theme: "bootstrap",
+            ajax: {
+                url: '/housekeeping/api/search-role',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                  return {
+                    searchTerm: params.term
+                   };
+                 },
+                processResults: function (data) {
+                  return {
+                    results: data
+                  };
+                },
+                cache: true
+            }
+         });
+         
+         
+         $('.targetPermission').select2({
+            placeholder: 'Select an permission',
+            width: '98.5%',
+            theme: "bootstrap",
+            ajax: {
+                url: '/housekeeping/api/search-permission',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                  {% if data.roleid is defined %}
+                  return {
+                    searchTerm: params.term,
+                    roleid: {{data.roleid}}
+                   };
+                  {% else %}
+                  return {
+                    searchTerm: params.term
+                   };
+                  {% endif %}
+                 },
+                processResults: function (data) {
+                  return {
+                    results: data
+                  };
+                },
+                cache: true
+            }
+         });
+           
+         $('.targetAlert, .targetBan, .targetReset, .targetManage').select2({
+               placeholder: 'Select an user',
+               width: '92.5%',
+               theme: "bootstrap",
+               ajax: {
+                   url: '/housekeeping/api/search-player',
+                   dataType: 'json',
+                   delay: 250,
+                   data: function (params) {
+                     return {
+                       searchTerm: params.term
+                      };
+                    },
+                   processResults: function (data) {
+                     return {
+                       results: data
+                     };
+                   },
+                   cache: true
+               }
+           });
+           
+         $('.forumCategory').select2({
+               placeholder: 'Select an category',
+               width: '92.5%',
+               theme: "bootstrap",
+               ajax: {
+                   url: '/housekeeping/api/forum-categorys',
+                   dataType: 'json',
+                   delay: 250,
+                   data: function (params) {
+                     return {
+                       searchTerm: params.term
+                      };
+                    },
+                   processResults: function (data) {
+                     return {
+                       results: data
+                     };
+                   },
+                   cache: true
+               }
+           });
+      </script>
+      {% for message in flash_messages %} 
+      <script type="text/javascript">
+         $(function () {
+           
+           
+             {% if message.type == 'error' %}
+                 new PNotify({
+                      title: 'Oeps!',
+                      text: '{{ message.body }}',
+                      type: 'error',
+                  });
+             {% endif %}
+             {% if message.type == 'success' %}
+                 new PNotify({
+                      title: 'Jeuj!',
+                      type: 'success',
+                      text: '{{ message.body }}',
+                  });
+             {% endif %}
+             {% if message.type == 'warning' %}
+                 new PNotify({
+                      title: 'Let op!',
+                      text: '{{ message.body }}',
+                      type: 'warning'
+                  });
+             {% endif %}
+             {% if message.type == 'warning-hide' %}
+                   new PNotify({
+                      title: 'Let op!',
+                      text: '{{ message.body }}',
+                      hide: false
+                   });
+             {% endif %}
+         });
+      </script>
+      {% endfor %}   
+      <svg width="0" height="0" style="position:absolute">
+         <defs>
+            <symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
+               <path d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z"></path>
+            </symbol>
+         </defs>
+      </svg>
+   </body>
+</html>
+{% endblock %}
+{% endif %}

@@ -1,0 +1,8 @@
+{% if current_user %}
+<form method="post" action="/forum/thread/edit/{{post.id}}">
+    <div class="form-group">
+        <textarea class="form-control" rows="10" name="content" id="edit">{{post.content}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block forum-edit" data-post="27953">Edit</button>
+</form>
+{% endif %}

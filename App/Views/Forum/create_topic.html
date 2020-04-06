@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% set object = 'create_topic' %}
+{% block title %}{{data.topics.title}}{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+   <div class="container">
+      <div class="row content-box">
+         <div class="col-md-8">
+            <ol class="breadcrumb" style="background: white; border-radius: 0;">
+               <li><a href="/forum">Forum</a></li>
+               <li><a href="/forum/category/{{data.topics.id}}">{{data.topics.title}}</a></li>
+               <li class="active">Nieuw topic</li>
+            </ol>
+            <div class="banner-header" style="background: url(/templates/brain/style/images/1567fb58ce57xc_xjkjn29js.png) center; margin-bottom: 10px; color: white; padding: 20px;">
+               <div class="bh-title" style="font-size: 22px;">Habbo Discussion</div>
+               <div class="bh-desc">Talk all things Habbo here!</div>
+            </div>
+            <div class="content">
+               <form method="post" action="/forum/category/{{data.topics.id}}/create">
+                  <div class="form-group">
+                     <label for="title">Topic titel</label>
+                     <input type="text" class="form-control" id="title" name="title" placeholder="Waar denk jij aan?" required>
+                  </div>
+                  <div class="form-group">
+                     <textarea class="form-control" rows="10" name="message" id="message"></textarea>
+                  </div>
+                  <p style="font-size: 13px;">Let op! Het is nu alleen mogelijk om iets te posten in plaintext, koop de <strong>BBCode Editing addon</strong> uit de <a href="/shop" target="_blank">{{sitename}} shop</a> om gebruik te maken van <strong>BBCodes</strong>.
+                    In de shop koop je overigens nog meer leuke features!
+                  </p>
+                  <button type="submit" class="btn btn-primary btn-block forum-thread-new">Maak topic aan!</button>
+               </form>
+            </div>
+         </div>
+         <div class="col-md-4">
+            <div class="content">
+               <div class="title">Begin een nieuw topic</div>
+               <img src="https://www.habbobites.com/images/site/guy_typewriter.gif" style="float: right;">
+               <p>Your new thread will be made public, and open for discussion.</p>
+               <p>All posts must adhere to our <a href="https://www.habbobites.com/page/terms-of-service" target="_blank">Terms of Service</a>.</p>
+            </div>
+            <div class="content-header habbos">
+               <div class="content-header-title">Who's online</div>
+               <div class="content-header-desc">Is your crush online?</div>
+            </div>
+            <div class="content">
+               9 users online now.
+               <div class="online-users">
+                  <div class="user-style"><a href="/user/Arene" data-toggle="tooltip" data-placement="top" title="" data-original-title="Arene on Habbo"><span class="user-icon hammi"></span> <span class="user-style fire">Arene</span></a></div>
+                  <div class="user-style"><a href="/user/Audemars" data-toggle="tooltip" data-placement="top" title="" data-original-title="audemars on Habbo"><span class="user-icon samara"></span> <span class="user-style darkgrey">Audemars</span></a></div>
+                  <div class="user-style"><a href="/user/Kingdoms" data-toggle="tooltip" data-placement="top" title="" data-original-title="Kingdoms. on Habbo"><span class="user-icon emu"></span> <span class="user-style seaweed">Kingdoms</span></a></div>
+                  <div class="user-style"><a href="/user/Zen" data-toggle="tooltip" data-placement="top" title="" data-original-title="taromilkshake on Habbo"><span class="user-icon koala"></span> <span class="user-style fire">Zen</span></a></div>
+                  <div class="user-style"><a href="/user/mintshopp" data-toggle="tooltip" data-placement="top" title="" data-original-title="mintshopp on Habbo"><span class="user-icon pudding"></span> <span class="user-style slushy">mintshopp</span></a></div>
+                  <div class="user-style"><a href="/user/Sally" data-toggle="tooltip" data-placement="top" title="" data-original-title="angeliciousidol on Habbo"><span class="user-icon creampie"></span> <span class="user-style default">Sally</span></a></div>
+                  <div class="user-style"><a href="/user/Denise" data-toggle="tooltip" data-placement="top" title="" data-original-title="denise019 on Habbo"><span class="user-icon kittydoughnut"></span> <span class="user-style seaweed">Denise</span></a></div>
+                  <div class="user-style"><a href="/user/JamieChurchley" class="user-style maroon" data-toggle="tooltip" data-placement="top" title="" data-original-title="JamieChurchley on Habbo">JamieChurchley</a></div>
+                  <div class="user-style"><a href="/user/Raizer" class="user-style orange" data-toggle="tooltip" data-placement="top" title="" data-original-title="Steelpan on Habbo">Raizer</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
