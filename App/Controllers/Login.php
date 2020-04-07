@@ -129,11 +129,7 @@ class Login extends \Core\Controller
     {
         if(Auth::login($user))
         {
-            Flash::addMessage('Welkom ' . $user->username . '!');
-            if(User::giveUserPresent())
-            {
-                Flash::addMessage('Je hebt een cadeau gekregen! Bekijk hem tussen bij transacties op jouw account', FLASH::SUCCESS);
-            }   
+            Flash::addMessage('Welkom ' . $user->username . '!');  
             $this->redirect('/');
         }
         else

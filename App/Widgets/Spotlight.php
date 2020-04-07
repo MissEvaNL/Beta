@@ -19,11 +19,15 @@ class Spotlight extends \Core\Model
         $staffObj  = static::getFromSpotlight('staff');
         $userObj   = static::getFromSpotlight('user');
 
+        if($staffObj !== null) {
         $object->staff = $staffObj;
         $object->staff->font = Shop::selectItemById($staffObj->item_font);
+        }
  
+        if($userObj !== null) {
         $object->user = $userObj;
         $object->user->font = Shop::selectItemById($userObj->item_font);
+        }
       
         return $object;  
     }

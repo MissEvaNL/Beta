@@ -4,7 +4,7 @@ namespace App;
 class Session
 {
 
-    private static $prefix = 'habbox_';
+    private static $prefix = '';
 
     private static $sessionStarted = false;
 

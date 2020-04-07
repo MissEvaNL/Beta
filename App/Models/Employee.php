@@ -11,7 +11,7 @@ class Employee extends \Core\Model
 {
     public static function getRoles()
     {
-        return QueryBuilder::table(Emu::Get('tablename.Permissions'))->where('id', '!=', 1)->orderBy('id', 'desc')->get();
+        return QueryBuilder::table(Emu::Get('tablename.Permissions'))->select(QueryBuilder::raw(Emu::Get('table.Permissions.rank_name') . ' as name, id'))->where('id', '!=', 1)->orderBy('id', 'desc')->get();
     }
   
 }

@@ -63,11 +63,13 @@ class Store extends Authenticated
             
             $this->data->shop = $shop;
           
-            $clubDays = User::getClubDays(Auth::returnUserId());
+            if(Config::get('emulatorname') !== 'Arcturus') {
+                $clubDays = User::getClubDays(Auth::returnUserId());
+            }
         
             View::renderTemplate('Shop/store.html', [
                 'data' => $this->data,
-                'club' => $clubDays
+                'club' => $clubDays ?? null
             ]);
         }
     }

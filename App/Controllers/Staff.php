@@ -33,6 +33,7 @@ class Staff extends Authenticated
         foreach($employee as $rank)
         {
             $rank->users = User::getUsersByRankId($rank->id);
+          
             if(!empty($rank->users) && is_array($rank->users))
             {
                 foreach($rank->users as $users)

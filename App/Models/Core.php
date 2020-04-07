@@ -78,7 +78,7 @@ class Core extends \Core\Model
   
     public static function getBans($username, $ipadress)
     {
-        return QueryBuilder::table('bans')->where(Emu::Get('table.Bans.user_id'), $username)->orWhere(Emu::Get('table.Bans.user_id'), $ipadress)->where('expire', '>', time())->first();
+        return QueryBuilder::table('bans')->where(Emu::Get('table.Bans.user_id'), $username)->orWhere(Emu::Get('table.Bans.user_id'), $ipadress)->where(Emu::Get('table.Bans.user_id'), '>', time())->first();
     }
   
     public static function calculate($key, $value, $operator)
