@@ -27,7 +27,7 @@ class Config
     const host          = 'localhost';
     const database      = 'beta';
     const username      = 'root';
-    const password      = 'cosmic123';
+    const password      = '';
     const charset       = 'utf8';
     const collation     = 'collation';
     const prefix        = '';
