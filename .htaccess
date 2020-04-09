@@ -1,5 +1,5 @@
 RewriteEngine on
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^(.*)$ https://talpahotel.nl/$1 [R,L]
+RewriteRule ^(.*)$ https://projectbeta.online/$1 [R,L]
 RewriteCond %{REQUEST_URI} !public/
 RewriteRule (.*) /public/$1 [L]
